@@ -9,7 +9,10 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        About us? well we are here to help
+      </p>
+      <p>
+        Help how? well finding your local bands!
       </p>
     </div>
   </div>

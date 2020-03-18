@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+import '../App/App.css';
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title bop">Beats on Point𝅘𝅥𝅯</h2>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">

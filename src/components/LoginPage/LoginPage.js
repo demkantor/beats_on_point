@@ -31,7 +31,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="flexContainer">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -40,7 +40,7 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form className="flexForm" onSubmit={this.login}>
           <h1>Login</h1>
           <div>
             <label htmlFor="username">

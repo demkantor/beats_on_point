@@ -31,7 +31,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="flexContainer">
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -40,7 +40,7 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
+        <form className="flexForm" onSubmit={this.registerUser}>
           <h1>Register User</h1>
           <div>
             <label htmlFor="username">

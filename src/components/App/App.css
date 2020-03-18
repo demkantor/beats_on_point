@@ -8,29 +8,56 @@ body {
     margin: 50px;
 }
 
-form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.flexForm{
+    text-align: start;
+    justify-items: flex-start;
+    margin-left: 3vw;
+    padding: 5vw;
+}
+
+.welcomeFriend{
+  display: flex;
+  flex-direction: column;
+}
+
+.welcomeId{
+    text-align: start;
+    justify-items: flex-start;
+    margin-left: 3vw;
+    padding: 5vw;
+}
+
+.btnFix{
+  width: 100px;
+  margin-left: 7vw;
+}
+
+#welcome{
+  text-align: center;
+  
 }
 
 input {
     margin: 5px;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
-  border-radius: 4px;
-  color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
-  outline:0;
-  cursor: pointer;
-}
+    background-color: #00acb0;
+    border-radius: 4px;
+    color: #f8f8f8;
+    min-height: 50px;
+    min-width: 100px;
+    outline:0;
+    cursor: pointer;
+  }
+
 
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
@@ -38,6 +65,7 @@ input {
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
+    margin: auto;
     background:none;
     color:inherit;
     border:none;
@@ -47,3 +75,106 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+
+.link-button:hover{
+    transform: scale(1.1);
+}
+
+.nav-title {
+    font-size: 24px;
+    font-weight: 700;
+    display: inline-block;
+    color: #f2f2f2;
+    padding-left: 10px;
+}
+
+.nav {
+  overflow: hidden;
+  background-color: #00acb0;
+}
+
+.nav-link {
+  float: left;
+  color: #f2f2f2;
+  background-color: #00acb0;
+  text-align: center;
+  padding: 24px 10px;
+  text-decoration: none;
+  font-size: 15px;
+
+  /* these last two make the logout button in
+  the nav bar look like another link */
+  border:none;
+  cursor: pointer;
+  outline:0;
+}
+
+.nav-link:hover {
+  background-color: #008183;
+}
+
+.nav-right {
+  float: right;
+}
+
+footer {
+    position: absolute;
+    bottom: 2vh;
+    left:2vh;
+}
+
+
+@keyframes hvr-pulse-grow {
+    to {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  }
+
+  .bop {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+
+  .bop:hover, .bop:focus, .bop:active {
+    -webkit-animation-name: hvr-pulse-grow;
+    animation-name: hvr-pulse-grow;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+  }
+
+  .lost{
+    width:95vw;
+    margin-top: 5vw;
+    margin-left: 2.5vw;
+  }
+
+  .lostLink{
+    font-size: larger;
+    width: 50vw;;
+    margin-bottom: 2vh;
+    margin-left: 20vw;
+    margin-right: 20vw;
+  }
+
+@media all and (min-width: 500px) {
+   
+    form {
+        background-color: #dbd5d5;
+        width: 30%;
+        height: 250px;
+        margin: 20px auto;
+        padding: 25px;
+        border-radius: 2px;
+    }
+
+  }
