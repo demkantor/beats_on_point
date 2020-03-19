@@ -29,7 +29,7 @@ class Lebowski extends Component {
                   {this.props.reduxState.lebowskiReducer.quote.lines.map(rug => (
                     <div className="display" key={rug.id}>
                       <h4>{rug.text}</h4>
-                      <p>{rug.character.name}</p>
+                      <p>-{rug.character.name}</p>
                     </div>
                     ))}
                   </div>

@@ -41,7 +41,8 @@ CREATE TABLE "calendar" (
   "id" SERIAL PRIMARY KEY,
   "bands_id" int,
   "venues_id" int,
-  "date" date,
+  "date" date NOT NULL DEFAULT CURRENT_DATE,
+  "time" TIME NOT NULL DEFAULT CURRENT_TIME,
   "cost" int
 );
 
@@ -56,3 +57,10 @@ ALTER TABLE "bands" ADD FOREIGN KEY ("user_name_id") REFERENCES "users" ("id");
 ALTER TABLE "bands" ADD FOREIGN KEY ("genres_id") REFERENCES "genres" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("bands_id") REFERENCES "bands" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("venues_id") REFERENCES "venues" ("id");
+
+--enter some started data
+INSERT INTO "genres" ("genre")
+VALUES ('Rock'), ('Pop'), ('Hip-Hop'), ('Alternative'), ('Indie'), ('Jazz'),
+('Electronic'), ('Folk'), ('Latin'), ('R&B / Soul'), ('Reggae'),('Blues'),
+('Metal'), ('Punk'), ('Grunge'), ('Classical'), ('Country');
+

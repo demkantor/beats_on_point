@@ -6,17 +6,19 @@ import {
   Switch,
   Link,
 } from 'react-router-dom';
-
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import './App.css';
 import {connect} from 'react-redux';
 import Footer from '../Footer/Footer'
 import Nav from '../Nav/Nav';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
+import Zip from '../Zip/Zip'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import Lebowski from '../Lebowski/Lebowski';
-import './App.css';
+import Shows from '../Shows/Shows';
+
 
 
 class App extends Component {
@@ -39,7 +41,9 @@ class App extends Component {
                 path="/about"
                 component={AboutPage}
               />
+              <Route path="/zip" component={Zip}/>
               <Route path="/lebowski" component={Lebowski}/>
+              <Route path="/shows" component={Shows}/>
               {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/home will show the UserPage if the user is logged in.
               If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

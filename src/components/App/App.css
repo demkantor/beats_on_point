@@ -146,6 +146,16 @@ footer {
   background-color: #9999FF;
 }
 
+#filter{
+  cursor: pointer;
+  font-size: large;
+  float: right;
+  background-color: #6666CC;
+  border-radius: 4px;
+  color: #f8f8f8;
+  min-height: 23px;
+  min-width: 100px;
+}
 
 @keyframes hvr-pulse-grow {
     to {
