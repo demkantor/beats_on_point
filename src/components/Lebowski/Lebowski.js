@@ -17,22 +17,25 @@ class Lebowski extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <h1 className="nav-title">"Yeah well, that's just, ya know, like, your opinion, man."</h1>
-        <p>"The Dude"</p>
-        <br/>
-        <button onClick={this.moreFromTheDude} >More from The Dude</button>
-          {this.props.reduxState.lebowskiReducer.quote && (
-              <div className="gridContainer">
-                {this.props.reduxState.lebowskiReducer.quote.lines.map(rug => (
-                  <div className="display" key={rug.id}>
-                    <h4>{rug.text}</h4>
-                    <p>{rug.character.name}</p>
+      <>
+        <div className='lebowskiContainer'>
+          <h1 className="dude">"Yeah well, that's just, ya know, like, your opinion, man."</h1>
+          <p className="dude">"The Dude"</p>
+          <button className="moreDude" onClick={this.moreFromTheDude} >More from The Dude</button>
+          <br/>
+          <br/>
+            {this.props.reduxState.lebowskiReducer.quote && (
+                <div className="dude">
+                  {this.props.reduxState.lebowskiReducer.quote.lines.map(rug => (
+                    <div className="display" key={rug.id}>
+                      <h4>{rug.text}</h4>
+                      <p>{rug.character.name}</p>
+                    </div>
+                    ))}
                   </div>
-                  ))}
-                </div>
-              )}
-      </div>
+                )}
+          </div>
+      </>
     )
   }
 }

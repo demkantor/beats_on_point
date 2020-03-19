@@ -8,10 +8,8 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
+import Footer from '../Footer/Footer'
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
@@ -29,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <>
           <Nav />
           <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -60,17 +58,17 @@ class App extends Component {
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => 
-              <div>
+              <div className="fourOfour">
               <img src="./images/lebowski_404.png" alt="lebowski" className="lost"/>
               
               <Link className="nav-link lostLink" to="/lebowski">The rug really did tie the room together</Link>
-              <Link className="nav-link lostLink" to="/home">Bring Me Somewhere Safe!</Link>
+              <Link className="nav-link lostLinkBack" to="/home">Bring Me Somewhere Safe!</Link>
               </div>
               } />
               
             </Switch>
-          <Footer />
-        </div>
+            <Footer />
+        </>
       </Router>
   )}
 }

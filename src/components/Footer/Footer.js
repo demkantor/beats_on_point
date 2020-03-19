@@ -7,7 +7,7 @@ import '../App/App.css'
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const Footer = () => (
-  <footer className="bop">
+  <footer className="bop foot">
     &copy; Beats on Point
   </footer>
 );
