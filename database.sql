@@ -18,7 +18,7 @@ CREATE TABLE "venues" (
   "address" varchar(120),
   "description" varchar,
   "image" bytea,
-  "twiter" varchar,
+  "twitter" varchar,
   "facebook" varchar,
   "www" varchar,
   "youtube" varchar
@@ -30,11 +30,10 @@ CREATE TABLE "bands" (
   "user_name_id" int,
   "description" varchar,
   "image" bytea,
-  "twiter" varchar,
+  "twitter" varchar,
   "facebook" varchar,
   "www" varchar,
-  "youtube" varchar,
-  "genres_id" int 
+  "youtube" varchar
 );
 
 CREATE TABLE "calendar" (
@@ -51,9 +50,16 @@ CREATE TABLE "genres" (
   "genre" varchar(50)
 );
 
+-- CREATE JUNCTION TABLE
+CREATE TABLE "bands_genres" (
+  "id" SERIAL PRIMARY KEY,
+  "bands_id" int NOT NULL REFERENCES "bands",
+  "genres_id" int NOT NULL REFERENCES "genres"
+);
+
 --create foreign keys
-ALTER TABLE "venues" ADD FOREIGN KEY ("user_name_id") REFERENCES "users" ("id");
-ALTER TABLE "bands" ADD FOREIGN KEY ("user_name_id") REFERENCES "users" ("id");
+ALTER TABLE "venues" ADD FOREIGN KEY ("user_name_id") REFERENCES "user" ("id");
+ALTER TABLE "bands" ADD FOREIGN KEY ("user_name_id") REFERENCES "user" ("id");
 ALTER TABLE "bands" ADD FOREIGN KEY ("genres_id") REFERENCES "genres" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("bands_id") REFERENCES "bands" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("venues_id") REFERENCES "venues" ("id");

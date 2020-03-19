@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import Lebowski from '../Lebowski/Lebowski';
 import Shows from '../Shows/Shows';
+import BandEdit from '../BandEdit/BandEdit';
 
 
 
@@ -44,6 +45,7 @@ class App extends Component {
               <Route path="/zip" component={Zip}/>
               <Route path="/lebowski" component={Lebowski}/>
               <Route path="/shows" component={Shows}/>
+              <Route path="/bandEdit" component={BandEdit}/>
               {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/home will show the UserPage if the user is logged in.
               If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -62,12 +64,11 @@ class App extends Component {
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => 
-              <div className="fourOfour">
-              <img src="./images/lebowski_404.png" alt="lebowski" className="lost"/>
-              
-              <Link className="nav-link lostLink" to="/lebowski">The rug really did tie the room together</Link>
-              <Link className="nav-link lostLinkBack" to="/home">Bring Me Somewhere Safe!</Link>
-              </div>
+                <div className="fourOfour">
+                  <img src="./images/lebowski_404.png" alt="lebowski" className="lost"/>
+                  <Link className="nav-link lostLink" to="/lebowski">The rug really did tie the room together</Link>
+                  <Link className="nav-link lostLinkBack" to="/home">Bring Me Somewhere Safe!</Link>
+                </div>
               } />
               
             </Switch>
