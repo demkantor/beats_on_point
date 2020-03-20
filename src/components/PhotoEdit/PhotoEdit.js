@@ -12,6 +12,10 @@ class PhotoEdit extends Component {
         image: null
     }
 
+    componentDidMount=()=>{
+        // this.props.dispatch({type: 'GET_YOUR_PICTURE', payload: this.props.reduxState.user.id});
+    }
+
     handleChange=(event)=>{
         this.setState({
             file: event.target.files[0],
@@ -48,6 +52,16 @@ class PhotoEdit extends Component {
                     <div className="previewImage">
                         <p>preview: <strong>{this.state.filename}</strong></p>
                         <img src={this.state.image} alt='' width="250px"/>   
+                    </div>
+                    :
+                    <div className="previewImage">
+                        <p>a preview of your image will display below </p>
+                        <img src="/images/preview.png" alt='' width="250px"/>
+                    </div>
+                    ?
+                    <div className="previewImage">
+                        <p>Current photo:</p>
+                        <img src={`data:image/png;base64,${this.props.reduxState.user.photo}`}  alt='' width="250px"/>   
                     </div>
                     :
                     <div className="previewImage">

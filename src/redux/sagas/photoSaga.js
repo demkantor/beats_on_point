@@ -5,8 +5,17 @@ import {takeEvery, put} from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* photoSaga() {
     yield takeEvery('WANT_YOUR_PICTURE', wantYourPicture);
+    yield takeEvery('GET_YOUR_PICTURE', getYourPicture);
 }
 
+
+//gets DB stored image
+function* getYourPicture(id){
+    console.log('saga GET photo for user id:', id, id.payload)
+    const userImage = yield axios.get(`/api/photo/${id.payload}`);
+    console.log('in saga GET photo with:', userImage.data);
+    yield put({type: 'GOT_YOUR_PICTURE', payload: userImage.data});
+}
 
 //gets list of quotes
 function* wantYourPicture(image){
@@ -15,6 +24,7 @@ function* wantYourPicture(image){
     try {
         const photoUp = yield axios.put(`/api/photo/${image.payload.id}`, image.payload.pic, config);
         console.log('in saga photo PUT back with res.data', photoUp.data);
+        yield put({type: 'GET_YOUR_PICTURE', payload: image.payload.id});
     } catch(error){
         console.log('error in saga /photo/PUT:', error);
     }
