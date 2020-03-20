@@ -8,7 +8,8 @@ CREATE TABLE "user" (
   "password" VARCHAR (1000) NOT NULL
   "zip_code" varchar,
   "band" boolean DEFAULT false,
-  "venue" boolean DEFAULT false
+  "venue" boolean DEFAULT false,
+  "photo" bytea
 );
 
 CREATE TABLE "venues" (
@@ -17,7 +18,6 @@ CREATE TABLE "venues" (
   "user_name_id" int,
   "address" varchar(120),
   "description" varchar,
-  "image" bytea,
   "twitter" varchar,
   "facebook" varchar,
   "www" varchar,
@@ -29,7 +29,6 @@ CREATE TABLE "bands" (
   "name" varchar(100),
   "user_name_id" int,
   "description" varchar,
-  "image" bytea,
   "twitter" varchar,
   "facebook" varchar,
   "www" varchar,

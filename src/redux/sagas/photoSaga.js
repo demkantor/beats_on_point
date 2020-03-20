@@ -10,13 +10,13 @@ function* photoSaga() {
 
 //gets list of quotes
 function* wantYourPicture(image){
-    yield console.log('in photoSaga post with:', image.payload);
+    yield console.log('in photoSaga PUT with:', image.payload);
     const config = { headers: {'Content-Type': 'multipart/form-data'} }
     try {
-        const photoUp = yield axios.post(`/api/photo/${image.payload.id}`, image.payload.FormData, config);
-        console.log('in saga photo post back with res.data', photoUp.data);
+        const photoUp = yield axios.put(`/api/photo/${image.payload.id}`, image.payload.pic, config);
+        console.log('in saga photo PUT back with res.data', photoUp.data);
     } catch(error){
-        console.log('error in saga /photo/POST:', error);
+        console.log('error in saga /photo/PUT:', error);
     }
 }
 

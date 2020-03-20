@@ -4,16 +4,19 @@ require('dotenv').config();
 const { Client } = require('pg');
 const app = express();
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const sessionMiddleware = require('./modules/session-middleware');
 
 const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const photoRouter = require('./routes/photo.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload())  ;//to parse the files
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -24,6 +27,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/photo', photoRouter);
 
 // Serve static files
 app.use(express.static('build'));
@@ -36,7 +40,7 @@ app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
-//* say hi to postgres *//
+//* say hi to postgres *// --comment out before production build--
 const client = new Client({
   host: 'localhost',
   port: 5432,

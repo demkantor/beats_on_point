@@ -17,7 +17,7 @@ class PhotoEdit extends Component {
             file: event.target.files[0],
             filename: event.target.files[0].name,
             image: URL.createObjectURL(event.target.files[0])
-        })
+        });
     }
 
     submit=(event)=>{
@@ -25,7 +25,7 @@ class PhotoEdit extends Component {
         console.log('just commenting', this.state.filename, this.props.reduxState.user.id);
         const formData = new FormData();
         formData.append('file', this.state.file);
-        let image = ({pic: formData, id: this.props.reduxState.user.id});
+        const image = ({pic: formData, id: this.props.reduxState.user.id});
         this.props.dispatch({type: 'WANT_YOUR_PICTURE', payload: image});
     }
 
@@ -36,7 +36,7 @@ class PhotoEdit extends Component {
   render() {
     return (
       <>
-        <div className='bandEdit'>
+        <div className='photoEdit'>
             <form  className="photoForm" onSubmit={this.submit}>
                  <div className="photoInput">
                     <input type="file" ref="fileUploader" onChange={this.handleChange} />
