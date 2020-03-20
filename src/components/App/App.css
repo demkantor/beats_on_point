@@ -1,5 +1,6 @@
 body {
-    font-family: 'Roboto';font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+    /* font-family: 'Roboto';font-size: 18px; */
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     margin: 0px;
 }
@@ -250,6 +251,49 @@ footer {
     -webkit-background-size: cover;
     background-size: cover;
   }
+
+  .photoForm{
+    display: grid;
+  }
+
+  .previewImage{
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  [type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+
+  [type="file"] + label {
+    background-color: #dd6090;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    margin-top: 1rem;;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 1rem 50px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+  }
+  
+  [type="file"] + label:hover {
+    background-color: #ec74a2;
+  }
+  
+  .photoInput{
+    text-align: center;
+  }
+  
+  
 
 @media all and (min-width: 500px) {
    
