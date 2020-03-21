@@ -13,6 +13,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const photoRouter = require('./routes/photo.router');
 const calendarRouter = require('./routes/calendar.router');
+const bandVenueRouter = require('./routes/bandVenue.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/photo', photoRouter);
 app.use('/api/calendar', calendarRouter);
+app.use('/api/event', bandVenueRouter);
 
 // Serve static files
 app.use(express.static('build'));

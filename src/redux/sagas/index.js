@@ -5,6 +5,8 @@ import userSaga from './userSaga';
 import lebowskiSaga from './lebowskiSaga';
 import photoSaga from './photoSaga';
 import calendarSaga from './calendarSaga';
+import bandVenueSaga from './bandVenueSaga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +23,6 @@ export default function* rootSaga() {
     lebowskiSaga(),
     photoSaga(),
     calendarSaga(),
+    bandVenueSaga(),
   ]);
 }

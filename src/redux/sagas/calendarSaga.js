@@ -7,7 +7,7 @@ function* calendarSaga() {
     yield takeEvery('GET_EVENT_LIST', getEventList);
 }
 
-//gets list of quotes
+//gets list of events
 function* getEventList(){
     console.log("We are here in calendar event GET");
     const eventList = yield axios.get('/api/calendar');

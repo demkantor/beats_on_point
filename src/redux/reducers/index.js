@@ -5,6 +5,7 @@ import user from './userReducer';
 import lebowskiReducer from './lebowskiReducer';
 import photoReducer from './photoReducer';
 import calendarReducer from './calendarReducer';
+import currentEvent from './bandVenueReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   lebowskiReducer,
   photoReducer,
   calendarReducer,
+  currentEvent,
 });
 
 export default rootReducer;

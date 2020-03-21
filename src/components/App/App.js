@@ -20,6 +20,8 @@ import Lebowski from '../Lebowski/Lebowski';
 import Shows from '../Shows/Shows';
 import PhotoEdit from '../PhotoEdit/PhotoEdit';
 import CalendarView from '../CalendarView/CalendarView';
+import BandView from '../BandView/BandView';
+import VenueView from '../VenueView/VenueView';
 
 
 
@@ -48,6 +50,8 @@ class App extends Component {
               <Route path="/shows" component={Shows}/>
               <Route path="/photo-edit" component={PhotoEdit}/>
               <Route path="/calendar-view" component={CalendarView}/>
+              <Route path="/band-view" component={BandView}/>
+              <Route path="/venue-view" component={VenueView}/>
               {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/home will show the UserPage if the user is logged in.
               If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

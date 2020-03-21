@@ -5,6 +5,10 @@ body {
     margin: 0px;
 }
 
+.center{
+  text-align: center;
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
@@ -312,6 +316,21 @@ footer {
     margin-top: 0;
   }
 
+  .eventInfo{
+    line-height: 2em;
+    min-width: 40vw;
+    max-width: 50vw;
+    padding: 1em;
+    text-align: center;
+  }
+
+  .inlinePhoto:hover, .inlinePhoto:focus, .inlinePhoto:active{
+    transform: scale(1.1);
+  }
+
+  .bandView{
+    width: 100vw;
+  }
 
 @media all and (min-width: 500px) {
    
