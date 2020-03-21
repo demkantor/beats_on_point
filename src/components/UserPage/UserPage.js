@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import SignInSuccess from '../SignInSuccess/SignInSuccess';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 const UserPage = (props) => (
-  <div className="welcomeFriend">
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p className="welcomeId" >Your ID is: {props.user.id}</p>
-    <LogOutButton className="log-in btnFix" />
-  </div>
+  <>
+    <div className="welcomeFriend">
+      <h1 id="welcome">
+        Welcome, { props.user.username }!
+      </h1>
+      <p className="welcomeId" >Your ID is: {props.user.id}</p>
+      <LogOutButton className="log-in btnFix" />
+       <SignInSuccess /> 
+    </div>
+  </>
+
 );
+
+  
+
 
 // Instead of taking everything from state, we just want the user info.
 // if you wanted you could write this code like this:
