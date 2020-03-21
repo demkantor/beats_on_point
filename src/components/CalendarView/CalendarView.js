@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../App/App.css';
+import {withRouter} from 'react-router-dom'
 
 
 
@@ -13,7 +14,8 @@ class CalendarView extends Component {
     bandInfo=(id)=>{
       console.log('you clickd on band info to event', id);
       this.props.history.push({
-        pathname: '/band-view'
+        pathname: '/band-view',
+        payload: id
       })
       this.props.dispatch({type: 'GET_THE_BAND', payload: id})
     }
@@ -21,7 +23,8 @@ class CalendarView extends Component {
     venueInfo=(id)=>{
       console.log('you clicked on venue info', id);
       this.props.history.push({
-        pathname: '/venue-view'
+        pathname: '/venue-view',
+        payload: id
       })
       this.props.dispatch({type: 'GET_THE_VENUE', payload: id})
     }
@@ -61,4 +64,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default connect(putReduxStateOnProps)(CalendarView);
+  export default withRouter(connect(putReduxStateOnProps)(CalendarView));
