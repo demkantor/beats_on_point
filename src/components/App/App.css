@@ -293,7 +293,25 @@ footer {
     text-align: center;
   }
   
+  .calendarView{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(95vw, 1fr));
+    grid-auto-rows: minmax(15vh, auto);
+    grid-gap: 1em;
+  }
   
+  .poster{
+    margin: 10px;
+    padding: 5px;
+    background: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+    margin-top: 0;
+  }
+
 
 @media all and (min-width: 500px) {
    

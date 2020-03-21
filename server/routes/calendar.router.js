@@ -2,10 +2,17 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-//get calendar
+//get calendar events
 router.get('/', (req, res) => {
     console.log('in calendar GET')
-    const queryText = `SELECT * FROM "calendar";`;
+    const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
+    TO_CHAR("date", 'Dy, Mon DD, YY') as "date",
+    TO_CHAR("time", 'hh12:mi AM') as "time",  
+    ENCODE("bands"."band_photo", 'base64') as "band_photo",
+    ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
+    FROM "calendar" 
+    JOIN "bands" ON "bands"."id" = "calendar"."bands_id"
+    JOIN "venues" ON "venues"."id" = "calendar"."venues_id";`;
     pool.query(queryText)
     .then( (result) => {
         res.send(result.rows);
@@ -16,7 +23,7 @@ router.get('/', (req, res) => {
     });
 });
 
-//post new event
+//post new event to calendar
 router.post('/', (req, res) => {
     console.log('in calendar POST with', req.params, req.body);
     // if (req.files === null) {

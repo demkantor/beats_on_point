@@ -21,7 +21,8 @@ CREATE TABLE "venues" (
   "twitter" varchar,
   "facebook" varchar,
   "www" varchar,
-  "youtube" varchar
+  "youtube" varchar,
+  "venue_photo" bytea
 );
 
 CREATE TABLE "bands" (
@@ -32,7 +33,8 @@ CREATE TABLE "bands" (
   "twitter" varchar,
   "facebook" varchar,
   "www" varchar,
-  "youtube" varchar
+  "youtube" varchar,
+  "band_photo" bytea
 );
 
 CREATE TABLE "calendar" (

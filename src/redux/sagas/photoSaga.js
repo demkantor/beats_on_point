@@ -11,20 +11,17 @@ function* photoSaga() {
 
 //gets DB stored image
 function* getYourPicture(id){
-    console.log('saga GET photo for user id:', id, id.payload)
     const userImage = yield axios.get(`/api/photo/${id.payload}`);
-    console.log('in saga GET photo with:', userImage.data);
     yield put({type: 'GOT_YOUR_PICTURE', payload: userImage.data});
 }
 
-//gets list of quotes
+//updates user photo in DB
 function* wantYourPicture(image){
-    yield console.log('in photoSaga PUT with:', image.payload);
     const config = { headers: {'Content-Type': 'multipart/form-data'} }
     try {
-        const photoUp = yield axios.put(`/api/photo/${image.payload.id}`, image.payload.pic, config);
-        console.log('in saga photo PUT back with res.data', photoUp.data);
-        yield put({type: 'GET_YOUR_PICTURE', payload: image.payload.id});
+        const photoUp = yield axios.put(`/api/photo/${image.payload.user.id}/${image.payload.user.band}/${image.payload.user.venue}`, image.payload.pic, config);
+        console.log('returning from photo put with', photoUp);
+        yield put({type: 'GET_YOUR_PICTURE', payload: image.payload.user.id});
     } catch(error){
         console.log('error in saga /photo/PUT:', error);
     }

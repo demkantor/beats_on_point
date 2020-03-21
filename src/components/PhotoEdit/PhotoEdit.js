@@ -29,7 +29,7 @@ class PhotoEdit extends Component {
         console.log('just commenting', this.state.filename, this.props.reduxState.user.id);
         const formData = new FormData();
         formData.append('file', this.state.file);
-        const image = ({pic: formData, id: this.props.reduxState.user.id});
+        const image = ({pic: formData, user: this.props.reduxState.user});
         this.props.dispatch({type: 'WANT_YOUR_PICTURE', payload: image});
     }
 
