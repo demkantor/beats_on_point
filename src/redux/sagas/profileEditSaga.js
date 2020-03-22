@@ -6,6 +6,7 @@ import {takeEvery, put} from "redux-saga/effects";
 function* profileEditSaga() {
     yield takeEvery('GET_THIS_BAND', getThisBand);
     yield takeEvery('GET_THIS_VENUE', getThisVenue);
+    yield takeEvery('EDIT_BAND_DESCRIPTION', editBandDescription);
 }
 
 //gets the logged-in band from DB
@@ -24,6 +25,18 @@ function* getThisVenue(venue){
     yield put({type: 'SET_THIS_VENUE', payload: theVenue.data})
 }
 
+//updates the logged-in band's description
+function* editBandDescription(band){
+    console.log("We are here in band edit description", band.payload);
+    try {
+        const theBand = yield axios.put(`/api/profile/band/description/${band.payload.id}`, band.payload);
+        console.log('returning from band edit description with', theBand);
+        yield put({type: 'GET_THIS_BAND', payload: band.payload.id});
+    } catch(error){
+        console.log('error in saga band edit description:', error);
+    }
+    yield 
+}
 
 
 export default profileEditSaga;

@@ -34,5 +34,19 @@ router.get('/venue/:id', (req, res) => {
     // });
 });
 
+//set logged-in band's description
+router.put('/band/description/:id', (req, res) => {
+    console.log('in band profile edit description with id:', req.params.id, req.body.edit)
+    const queryText = `UPDATE "bands" SET "description"=$1 WHERE "id"=$2;`;
+    pool.query(queryText, [req.body.edit, Number(req.params.id)])
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in profile edit description: ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;
