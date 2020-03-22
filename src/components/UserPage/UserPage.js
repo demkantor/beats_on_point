@@ -14,13 +14,11 @@ const UserPage = (props) => (
       </h1>
       <p className="welcomeId" >Your ID is: {props.user.id}</p>
       <LogOutButton className="log-in btnFix" />
-       <SignInSuccess /> 
+      <SignInSuccess /> 
     </div>
   </>
 
 );
-
-  
 
 
 // Instead of taking everything from state, we just want the user info.

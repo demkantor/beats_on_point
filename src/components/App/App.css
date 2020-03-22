@@ -378,6 +378,77 @@ footer {
     transform: scale(1.1);
   }
 
+  .profileViewEdit{
+    display: grid;
+    grid-template-columns: repeat(10, 10vw);
+    grid-template-rows: repeat(24, 3vh);
+  }
+
+  .nameEdit{
+    display: flex;
+    justify-self: end;
+    grid-column-start: 2;
+    grid-column-end: span 8;
+    grid-row-start: 1;
+    grid-row-end: span 2;
+  }
+
+  .bioPhotoEdit{
+    display: flex;
+    grid-column-start: 1;
+    grid-column-end: span 9;
+    grid-row-start: 3;
+    grid-row-end: span 6;
+  }
+
+  .bioDescriptionEdit{
+    display: flex;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    grid-column-start: 1;
+    grid-column-end: span 10;
+    grid-row-start: 10;
+    grid-row-end: span 8;
+    font-size: smaller;
+  }
+
+  .socialMediaEdit{
+    display: flex;
+    grid-column-start: 3;
+    grid-column-end: span 6;
+    grid-row-start: 22;
+    grid-row-end: span 2;
+  }
+
+  .editLinkIcon{
+    max-width: 4vw;
+    max-height: 3vh;
+  }
+
+  .editLinkIcon:hover{
+    transform: scale(2.5);
+  }
+
+  .editButton{
+    height: 6vh;
+  }
+
+  .editButton:hover{
+    transform: scale(1.5);
+  }
+
+  .editBioPhoto{
+    width: 30vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+
+  .profileName{
+    margin-right: 3vw;
+  }
+
+
+
 @media all and (min-width: 500px) {
    
     form {

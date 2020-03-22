@@ -14,11 +14,12 @@ const userRouter = require('./routes/user.router');
 const photoRouter = require('./routes/photo.router');
 const calendarRouter = require('./routes/calendar.router');
 const bandVenueRouter = require('./routes/bandVenue.router');
+const profileRouter = require('./routes/profile.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload())  ;//to parse the files
+app.use(fileUpload());  //to parse the files
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -32,6 +33,7 @@ app.use('/api/user', userRouter);
 app.use('/api/photo', photoRouter);
 app.use('/api/calendar', calendarRouter);
 app.use('/api/event', bandVenueRouter);
+app.use('/api/profile', profileRouter);
 
 // Serve static files
 app.use(express.static('build'));

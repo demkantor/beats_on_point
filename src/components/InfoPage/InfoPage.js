@@ -9,7 +9,7 @@ import React from 'react';
 const InfoPage = () => (
   <div>
     <p>
-      Different than about.. but not
+      same as about page... but protected
     </p>
   </div>
 );
