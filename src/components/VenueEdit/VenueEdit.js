@@ -13,20 +13,37 @@ class VenueEdit extends Component {
         this.props.dispatch({type: 'GET_THIS_VENUE', payload: user.id});
     }
 
-    twitterEdit=()=>{
-      console.log('you in twitter');
-    }
-
-    facebookEdit=()=>{
-      console.log('you in facebook');
-    }
-
-    wwwEdit=()=>{
-      console.log('you in www');
-    }
-
-    youtubeEdit=()=>{
-      console.log('you in youtube');
+    socialMedia=(venueId, type)=>{
+      console.log(`in social media, ${venueId}, ${type}`);
+      Swal.fire({
+        input: 'url',
+        inputPlaceholder: `Enter ${type} URL`
+      }).then((url)=>{
+        if (url) {
+          Swal.fire(`Entered URL: ${url.value}`)
+          console.log(url.value)
+          return(url)
+        }
+      }).then((url)=>{
+        Swal.fire({
+          title: `Is this the correct ${type} URL?`,
+          text: url.value,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: "Yes, let's keep it!"
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'saved!',
+              `Your ${type} link has been updated!`,
+              'success'
+            )
+            this.props.dispatch({type: 'EDIT_SOCIAL_MEDIA', payload:{edit: url.value, id: venueId, type: type, who: "venues"}})
+          }
+        })
+      })
     }
 
     nameEdit=()=>{
@@ -67,13 +84,13 @@ class VenueEdit extends Component {
                     </div>
                     <div className="socialMediaEdit">
                         <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>
-                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={this.twitterEdit}/>
+                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "twitter")}/>
                         <img className="linkIcon" src="/images/facebook.png" alt="facebook"/>
-                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={this.facebookEdit}/>                        
+                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "facebook")}/>                        
                         <img className="linkIcon" src="/images/www.png" alt="website"/>
-                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={this.wwwEdit}/>                        
+                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "www")}/>                        
                         <img className="linkIcon" src="/images/youtube.png" alt="youtube"/>
-                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={this.youtubeEdit}/>                   
+                        <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "youtube")}/>                   
                     </div>
                 </div>
               ))}

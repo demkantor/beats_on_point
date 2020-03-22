@@ -41,6 +41,7 @@ class PhotoEdit extends Component {
     return (
       <>
         <div className='photoEdit'>
+        <button className="log-in" onClick={()=>this.props.history.goBack()}>Back</button>
             <form  className="photoForm" onSubmit={this.submit}>
                  <div className="photoInput">
                     <input type="file" ref="fileUploader" onChange={this.handleChange} />

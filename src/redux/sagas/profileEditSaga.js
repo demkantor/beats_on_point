@@ -7,6 +7,7 @@ function* profileEditSaga() {
     yield takeEvery('GET_THIS_BAND', getThisBand);
     yield takeEvery('GET_THIS_VENUE', getThisVenue);
     yield takeEvery('EDIT_BAND_DESCRIPTION', editBandDescription);
+    yield takeEvery('EDIT_SOCIAL_MEDIA', editSocialMedia);
 }
 
 //gets the logged-in band from DB
@@ -35,7 +36,21 @@ function* editBandDescription(band){
     } catch(error){
         console.log('error in saga band edit description:', error);
     }
-    yield 
+}
+
+function* editSocialMedia(sm){
+    console.log("We are here in social media edit", sm.payload.edit, sm.payload.who, sm.payload.id, sm.payload.type);
+    try {
+        const socialMedia = yield axios.put(`/api/profile/socialMedia/${sm.payload.id}`, sm.payload);
+        console.log('returning from band edit description with', socialMedia);
+         if(sm.payload.who ==='bands'){
+             yield put({type: 'GET_THIS_BAND', payload: sm.payload.id});
+         }else{
+             yield put({type: 'GET_THIS_VEUNE', payload: sm.payload.id});
+         }     
+    } catch(error){
+        console.log('error in saga band edit description:', error);
+    }
 }
 
 
