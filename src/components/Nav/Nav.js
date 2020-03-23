@@ -25,9 +25,25 @@ const Nav = (props) => (
           <LogOutButton className="nav-link"/>
         </>
       )}
+      {/* if logged in user is a band show */}
+      {props.user.band === true && (
+        <>
+          <Link className="nav-link" to="/band-edit">
+            Edit Profile
+          </Link>
+        </>
+      )}
+      {/* if logged in user is a venue show */}
+       {props.user.venue === true && (
+        <>
+          <Link className="nav-link" to="/venue-edit">
+            Edit Profile
+          </Link>
+        </>
+      )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
+      <Link className="nav-link" to="/calendar-view">
+        Calendar
       </Link>
     </div>
   </div>

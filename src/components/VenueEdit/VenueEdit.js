@@ -54,13 +54,23 @@ class VenueEdit extends Component {
       console.log('describe me');
     }
 
+    addressEdit=()=>{
+      console.log('new address');
+    }
+
+    phoneEdit=()=>{
+      console.log('phone number');
+    }
+
     photoEdit=()=>{
       console.log('takin pictures');
+      this.props.history.push('/photo-edit');
     }
 
   render() {
     return (
       <>
+      <button onClick={()=>this.props.history.goBack()}>Back</button>
         {this.props.reduxState &&
         <h1>Welcome {this.props.reduxState.user.username}</h1>
         }
@@ -77,6 +87,14 @@ class VenueEdit extends Component {
                     <div className="bioPhotoEdit">
                         <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
                         <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
+                    </div>
+                    <div className="bioAddressEdit">
+                        {gig.address}
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.addressEdit}/>
+                    </div>
+                    <div className="bioPhoneEdit">
+                        {gig.phone}
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.phoneEdit}/>
                     </div>
                     <div className="bioDescriptionEdit">
                         {gig.description}

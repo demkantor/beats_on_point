@@ -21,6 +21,7 @@ import SignInSuccess from '../SignInSuccess/SignInSuccess';
 
 import BandEdit from '../BandEdit/BandEdit';
 import VenueEdit from '../VenueEdit/VenueEdit';
+import AddEvent from '../AddEvent/AddEvent';
 
 
 
@@ -51,9 +52,10 @@ class App extends Component {
 
               {/* All routes below are protected, must be signed in to see */}
               <ProtectedRoute exact path="/sign-in-success" component={SignInSuccess}/>
-              <ProtectedRoute exact path="/photo-edit" component={PhotoEdit}/>
+              <ProtectedRoute exact path="/calendar-edit" component={AddEvent}/>
               <ProtectedRoute exact path="/band-edit" component={BandEdit}/>
               <ProtectedRoute exact path="/venue-edit" component={VenueEdit}/>
+              <ProtectedRoute exact path="/photo-edit" component={PhotoEdit}/>
               {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/home will show the UserPage if the user is logged in.
               If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

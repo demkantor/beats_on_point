@@ -12,12 +12,13 @@ const UserPage = (props) => (
       <h1 id="welcome">
         Welcome, { props.user.username }!
       </h1>
-      <p className="welcomeId" >Your ID is: {props.user.id}</p>
+      <img className="bioPhoto" src={`data:image/png;base64,${props.user.photo}`} alt="profile" />
+      {/* <p className="welcomeId" >Your ID is: {props.user.id}</p> */}
+      ''
       <LogOutButton className="log-in btnFix" />
       <SignInSuccess /> 
     </div>
   </>
-
 );
 
 

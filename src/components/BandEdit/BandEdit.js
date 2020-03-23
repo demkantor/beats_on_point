@@ -104,14 +104,17 @@ class BandEdit extends Component {
        })
     }
 
-    photoEdit=(bandId)=>{
+    photoEdit=()=>{
       console.log('takin pictures');
       this.props.history.push('/photo-edit');
     }
 
+    
+
   render() {
     return (
       <>
+      <button onClick={()=>this.props.history.goBack()}>Back</button>
         {this.props.reduxState &&
         <h1>Welcome {this.props.reduxState.user.username}</h1>
         }
