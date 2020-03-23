@@ -108,8 +108,7 @@ input {
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
-  font-size: 15px;
-
+  font-size: 14px;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
@@ -122,7 +121,7 @@ input {
 }
 
 .nav-right {
-  float: right;
+  float: left;
 }
 
 footer {
@@ -447,7 +446,20 @@ footer {
     margin-right: 3vw;
   }
 
+  .profileCircle{
+    height: 25vw;
+    width: 25vw;
+    border-radius: 50%;
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+  }
 
+  .profileCircle:hover{
+    transform: scale(1.2);
+    text-align: center;
+    content: 'edit profile';
+  }
 
 @media all and (min-width: 500px) {
    

@@ -8,6 +8,7 @@ function* profileEditSaga() {
     yield takeEvery('GET_THIS_VENUE', getThisVenue);
     yield takeEvery('EDIT_BAND_DESCRIPTION', editBandDescription);
     yield takeEvery('EDIT_SOCIAL_MEDIA', editSocialMedia);
+    yield takeEvery('EDIT_NAME', editName);
 }
 
 //gets the logged-in band from DB
@@ -28,7 +29,7 @@ function* getThisVenue(venue){
 
 //updates the logged-in band's description
 function* editBandDescription(band){
-    console.log("We are here in band edit description", band.payload);
+    console.log("We are here in band edit description saga", band.payload);
     try {
         const theBand = yield axios.put(`/api/profile/band/description/${band.payload.id}`, band.payload);
         console.log('returning from band edit description with', theBand);
@@ -39,7 +40,7 @@ function* editBandDescription(band){
 }
 
 function* editSocialMedia(sm){
-    console.log("We are here in social media edit", sm.payload.edit, sm.payload.who, sm.payload.id, sm.payload.type);
+    console.log("We are here in social media edit saga", sm.payload.edit, sm.payload.who, sm.payload.id, sm.payload.type);
     try {
         const socialMedia = yield axios.put(`/api/profile/socialMedia/${sm.payload.id}`, sm.payload);
         console.log('returning from band edit description with', socialMedia);
@@ -47,6 +48,21 @@ function* editSocialMedia(sm){
              yield put({type: 'GET_THIS_BAND', payload: sm.payload.id});
          }else{
              yield put({type: 'GET_THIS_VEUNE', payload: sm.payload.id});
+         }     
+    } catch(error){
+        console.log('error in saga band edit description:', error);
+    }
+}
+
+function* editName(name){
+    console.log("We are here in name edit saga", name.payload.edit, name.payload.who, name.payload.id);
+    try {
+        const newName = yield axios.put(`/api/profile/name/${name.payload.id}`, name.payload);
+        console.log('returning from band edit description with', newName);
+         if(name.payload.who ==='bands'){
+             yield put({type: 'GET_THIS_BAND', payload: name.payload.id});
+         }else{
+             yield put({type: 'GET_THIS_VEUNE', payload: name.payload.id});
          }     
     } catch(error){
         console.log('error in saga band edit description:', error);

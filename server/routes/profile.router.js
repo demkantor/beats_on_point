@@ -64,5 +64,19 @@ router.put('/SocialMedia/:id', (req, res) => {
     });
 });
 
+//set name for logged-in band / venue 
+router.put('/name/:id', (req, res) => {
+    console.log('in name edit with id:', req.params.id, req.body)
+    const queryText = `UPDATE ${req.body.who} SET ${req.body.type}=$1 WHERE "id"=$2;`;
+    pool.query(queryText, [req.body.edit, Number(req.params.id)])
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in name edit: ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;

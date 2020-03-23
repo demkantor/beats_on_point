@@ -14,7 +14,7 @@ class BandEdit extends Component {
         this.props.dispatch({type: 'GET_THIS_BAND', payload: user.id});
     }
     
-    socialMedia=(bandId, type)=>{
+  socialMedia=(bandId, type)=>{
       console.log(`in social media, ${bandId}, ${type}`);
       Swal.fire({
         input: 'url',
@@ -45,11 +45,11 @@ class BandEdit extends Component {
           }
         })
       })
-    }
+  }
 
-    nameEdit=(bandId)=>{
+  nameEdit=(bandId, type)=>{
       console.log('whats in a name');
-      swal("Band Name Here....", {
+      swal("Whats in a name....", {
         content: "input",
       })
       .then((value) => {
@@ -57,7 +57,7 @@ class BandEdit extends Component {
         return(value)
       }).then((value)=>{
       swal({
-        title: `Great band name! should we keep it?`,
+        title: `Great name! should we keep it?`,
         text: `${value}`,
         icon: "warning",
         buttons: true,
@@ -65,15 +65,15 @@ class BandEdit extends Component {
       })
       .then((keep) => {
         if (keep) {
-          swal("You band name has been saved!", {
+          swal("You name has been saved!", {
             icon: "success",
           });
-        this.props.dispatch({type: 'EDIT_BAND_NAME', payload:{edit: value, id: bandId}})
+        this.props.dispatch({type: 'EDIT_NAME', payload:{edit: value, type: type, id: bandId, who: 'bands'}})
         } else {
           swal("Not touching your name!");
         }
       });
-   })
+    })
   }
 
     descriptionEdit=(bandId)=>{
@@ -109,7 +109,7 @@ class BandEdit extends Component {
       this.props.history.push('/photo-edit');
     }
 
-    
+  
 
   render() {
     return (
@@ -126,15 +126,15 @@ class BandEdit extends Component {
                 <div className="profileViewEdit" key={gig.id}>
                     <div className="nameEdit">
                         <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id)}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name')}/>
                     </div>    
                     <div className="bioPhotoEdit">
                         <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.photoEdit(gig.id)}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
                     </div>
                     <div className="bioDescriptionEdit">
                         {gig.description}
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id)}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id, 'description')}/>
                     </div>
                     <div className="socialMediaEdit">
                         <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../App/App.css';
 import Swal from 'sweetalert2'
+import swal from 'sweetalert';
 
 
 
@@ -46,9 +47,34 @@ class VenueEdit extends Component {
       })
     }
 
-    nameEdit=()=>{
+   nameEdit=(venueId, type)=>{
       console.log('whats in a name');
-    }
+      swal("Whats in a name....", {
+        content: "input",
+      })
+      .then((value) => {
+        swal(`You typed: ${value}`)
+        return(value)
+      }).then((value)=>{
+      swal({
+        title: `Great name! should we keep it?`,
+        text: `${value}`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((keep) => {
+        if (keep) {
+          swal("You name has been saved!", {
+            icon: "success",
+          });
+        this.props.dispatch({type: 'EDIT_NAME', payload:{edit: value, type: type, id: venueId, who: 'venues'}})
+        } else {
+          swal("Not touching your name!");
+        }
+      });
+    })
+  }
 
     descriptionEdit=()=>{
       console.log('describe me');
@@ -82,7 +108,7 @@ class VenueEdit extends Component {
                 <div className="profileViewEdit" key={gig.id}>
                     <div className="nameEdit">
                         <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.nameEdit}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name')}/>
                     </div>    
                     <div className="bioPhotoEdit">
                         <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
@@ -90,15 +116,15 @@ class VenueEdit extends Component {
                     </div>
                     <div className="bioAddressEdit">
                         {gig.address}
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.addressEdit}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.addressEdit(gig.id, 'address')}/>
                     </div>
                     <div className="bioPhoneEdit">
                         {gig.phone}
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.phoneEdit}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.phoneEdit(gig.id, 'phone')}/>
                     </div>
                     <div className="bioDescriptionEdit">
                         {gig.description}
-                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.descriptionEdit}/>
+                        <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id, 'description')}/>
                     </div>
                     <div className="socialMediaEdit">
                         <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>

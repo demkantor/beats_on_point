@@ -28,10 +28,10 @@ class BandView extends Component {
                     {gig.description}
                   </div>
                   <div className="socialMedia">
-                    <img className="linkIcons" src="/images/twitter.png" alt="https://twitter.com/{gig.twitter}"/>
-                    <img className="linkIcons" src="/images/facebook.png" alt="https://www.facebook.com/{gig.facebook}"/>
-                    <img className="linkIcons" src="/images/www.png" alt="https://www.{gig.www}"/>
-                    <img className="linkIcons" src="/images/youtube.png" alt="https://www.youtube.com/{gig.youtube}"/>
+                    <img className="linkIcons" src="/images/twitter.png" alt={gig.twitter}/>
+                    <img className="linkIcons" src="/images/facebook.png" alt={gig.facebook}/>
+                    <img className="linkIcons" src="/images/www.png" alt={gig.www}/>
+                    <img className="linkIcons" src="/images/youtube.png" alt={gig.youtube}/>
                   </div>
                 </div>
               ))}

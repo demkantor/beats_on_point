@@ -6,6 +6,8 @@ import {takeEvery, put} from "redux-saga/effects";
 function* bandVenueSaga() {
     yield takeEvery('GET_THE_BAND', getTheBand);
     yield takeEvery('GET_THE_VENUE', getTheVenue);
+    yield takeEvery('NEW_BAND', newBand);
+    yield takeEvery('NEW_VENUE', newVenue);
 }
 
 //gets the current band from DB
@@ -24,6 +26,27 @@ function* getTheVenue(venue){
     yield put({type: 'SET_THE_VENUE', payload: theVenue.data})
 }
 
+function* newBand(band){
+    console.log("We are here in new band POST saga", band.payload);
+    try {
+        const newBand = yield axios.post(`/api/profile/new/band/${band.payload}`);
+        console.log('returning from new band with', newBand);
+        yield put({type: 'GET_THIS_BAND', payload: band.payload});
+        } catch(error){
+            console.log('error in saga new band:', error);
+        }
+}
+
+function* newVenue(venue){
+    console.log("We are here in new venue POST saga", venue.payload);
+    try {
+        const newVenue = yield axios.post(`/api/profile/new/venue/${venue.payload}`);
+        console.log('returning from new venue with', newVenue);
+        yield put({type: 'GET_THIS_VENUE', payload: venue.payload});
+        } catch(error){
+            console.log('error in saga new venue:', error);
+        }
+}
 
 
 export default bandVenueSaga;

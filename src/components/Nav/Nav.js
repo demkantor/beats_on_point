@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import '../App/App.css';
 
+
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title bop">Beats on Point𝅘𝅥𝅯</h2>
+      <h2 className="nav-title bop">Beats on Point𝅘𝅥𝅯 </h2>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -28,18 +29,29 @@ const Nav = (props) => (
       {/* if logged in user is a band show */}
       {props.user.band === true && (
         <>
-          <Link className="nav-link" to="/band-edit">
+          {/* <Link className="nav-link" to="/band-edit">
             Edit Profile
-          </Link>
+          </Link> */}
+          <img className="profileCircle" 
+          src={`data:image/png;base64,${props.user.photo}`} 
+          alt="edit profile"
+          onClick={()=>props.history.push('/calendar-edit')}
+          />
         </>
       )}
       {/* if logged in user is a venue show */}
        {props.user.venue === true && (
         <>
-          <Link className="nav-link" to="/venue-edit">
+          {/* <Link className="nav-link" to="/venue-edit">
             Edit Profile
-          </Link>
+          </Link> */}
+           <img className="profileCircle" 
+            src={`data:image/png;base64,${props.user.photo}`} 
+            alt="edit profile"
+            onClick={()=>props.history.push('/calendar-edit')}
+          />
         </>
+        
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/calendar-view">
@@ -58,4 +70,4 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

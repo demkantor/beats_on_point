@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App/App.css'
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 
 // This is one of our simplest components
@@ -8,16 +9,25 @@ import { connect } from 'react-redux';
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is, so it doesn't need 'connect()'
 
-const InfoPage = (props) => (
+
+
+const InfoPage = (props) => {
+  const [value, setValue] = useState('');
+  
+return(
   <div>
       {(props.user.band === false && props.user.venue === false) &&
        <div>
+         <h4><strong>Beats on Point𝅘𝅥𝅯</strong>.  is a music first community</h4>
+         <p>Registering as a band or venue allows you to add to the public calendar</p>
          <p>want to register as a band or venue?</p>
-         <form>
-            <input type="radio" value="band"/>
-            <label htmlFor="band">Band</label>
-            <input type="radio" value="venue"/>
-            <label htmlFor="venue">Venue</label>
+         <form onSubmit={()=>{props.history.push('/calendar-view'); props.dispatch({type: `NEW_${value}`, payload: props.user.id})}}>
+            <input type="radio" name="choose" value="BAND" onChange={()=>setValue('BAND')}/>
+            <label htmlFor="BAND">Band</label>
+            <input type="radio" name="choose" value="VENUE" onChange={()=>setValue('BAND')}/>
+            <label htmlFor="VENUE">Venue</label>
+            <input type="radio" name="choose" value="NOPE" onChange={()=>setValue('NOPE')}/>
+            <label htmlFor="NOPE">No Thanks</label>
             <input type="submit" value="submit"/>
           </form>
        </div>
@@ -36,10 +46,10 @@ const InfoPage = (props) => (
      }
   </div>
 );
-
+    }    
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(InfoPage);
+export default withRouter(connect(mapStateToProps)(InfoPage));
