@@ -78,5 +78,27 @@ router.put('/name/:id', (req, res) => {
     });
 });
 
+//turn new user into a band
+router.post('/new/band/:id', (req, res) => {
+    console.log('in new band POST with', req.params);
+    const queryText = `INSERT INTO "bands" ("user_name_id") VALUES ($1);`;
+    pool.query(queryText, [Number(req.params.id)])
+    .then(() => { console.log('user id posted to bands table')
+     })
+    .catch((err) => {
+      console.log('Error completing new band POST', err);
+      res.sendStatus(500);
+    }).then(()=>{
+        const query = `UPDATE "user" SET "band"=true WHERE "id"=($1);`;
+        pool.query(query, [Number(req.params.id)])
+    }).then(() => {
+        res.send(req.params.id);
+    })
+    .catch( (error) => {
+        console.log(`Error in new band POST: ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;
