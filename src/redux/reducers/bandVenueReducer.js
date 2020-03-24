@@ -20,9 +20,28 @@ const venueReducer = (state = '', action) => {
     }
 }
 
-
+//stores all bands
+const allBands =(state =[], action)=>{
+    switch (action.type) {
+        case 'SET_ALL_BANDS':
+            return state = action.payload;
+        default:
+            return state;
+    }
+}
+//stores all venues
+const allVenues =(state =[], action)=>{
+    switch (action.type) {
+        case 'SET_ALL_VENUES':
+            return state = action.payload;
+        default:
+            return state;
+    }
+}
 
 export default combineReducers({
     bandReducer,
     venueReducer,
+    allBands,
+    allVenues
   });

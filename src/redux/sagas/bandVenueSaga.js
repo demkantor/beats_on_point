@@ -8,6 +8,9 @@ function* bandVenueSaga() {
     yield takeEvery('GET_THE_VENUE', getTheVenue);
     yield takeEvery('NEW_BAND', newBand);
     yield takeEvery('NEW_VENUE', newVenue);
+    yield takeEvery('GET_ALL_BANDS', getAllBands);
+    yield takeEvery('GET_ALL_VENUES', getAllVenues);
+
 }
 
 //gets the current band from DB
@@ -26,6 +29,23 @@ function* getTheVenue(venue){
     yield put({type: 'SET_THE_VENUE', payload: theVenue.data})
 }
 
+//gets all bands from DB
+function* getAllBands(){
+    console.log("We are here in all bands GET");
+    const allBands = yield axios.get(`/api/event/all/bands`);
+    console.log('in saga - all bands GET back with:', allBands.data);
+    yield put({type: 'SET_ALL_BANDS', payload: allBands.data})
+}
+
+//gets all venues from DB
+function* getAllVenues(){
+    console.log("We are here in venue GET");
+    const allVenues = yield axios.get(`/api/event/all/venues`);
+    console.log('in saga - venue GET back with:', allVenues.data);
+    yield put({type: 'SET_ALL_VENUES', payload: allVenues.data})
+}
+
+//unlocks band account for user
 function* newBand(band){
     console.log("We are here in new band POST saga", band.payload);
     try {
@@ -37,6 +57,7 @@ function* newBand(band){
         }
 }
 
+//unlocks venue account for user
 function* newVenue(venue){
     console.log("We are here in new venue POST saga", venue.payload);
     try {

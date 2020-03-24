@@ -32,6 +32,33 @@ router.get('/venue/:id', (req, res) => {
     });
 });
 
+//gets all bands
+router.get('/all/bands', (req, res) => {
+    console.log('in all bands GET')
+    const queryText = `SELECT * FROM "bands";`;
+    pool.query(queryText)
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in all bands GET ${error}`);
+        res.sendStatus(500);
+    });
+});
+
+//get all venues
+router.get('/all/venues', (req, res) => {
+    console.log('in all venues GET')
+    const queryText = `SELECT * FROM "venues";`;
+    pool.query(queryText)
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in all venues GET ${error}`);
+        res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;

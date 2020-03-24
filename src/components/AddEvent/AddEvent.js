@@ -12,7 +12,10 @@ class AddEvent extends Component {
 
   state={
     date: new Date(),
-    value: 'Free'
+    cost: 'Free',
+    band: null,
+    venue: null,
+
 }
 
 
@@ -20,9 +23,11 @@ class AddEvent extends Component {
       const user = this.props.reduxState.user;
       if(this.props.reduxState.user.band === true){
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'bands'}})
+        this.props.dispatch({type: 'GET_ALL_VENUES'})
     }else{
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'venues'}})
-    }
+        this.props.dispatch({type: 'GET_ALL_BANDS'})
+      }
   }
 
     console=()=>{
@@ -41,7 +46,11 @@ class AddEvent extends Component {
     }
 
     filter=(event)=>{
-      this.setState({value: event.target.value});
+      this.setState({cost: event.target.value});
+    }
+
+    select=(event)=>{
+      this.setState({band: event.target.value});
     }
 
     removeEvent=(event)=>{
@@ -50,16 +59,20 @@ class AddEvent extends Component {
       this.props.dispatch({type: 'REMOVE_EVENT', payload: {id: user.id, who: 'bands', eventId: event}})
     }
 
+    addition=()=>{
+      console.log('adding your friends')
+    }
+
 
   render() {
     return (
       <>
-      <button onClick={this.editProfile}>edit profile</button>
+      <button className="log-in" onClick={this.editProfile}>edit profile</button>
       {this.props.reduxState &&
         <h1>Welcome {this.props.reduxState.user.username}</h1>
         }
         <>
-        <h2>your current events</h2>
+        <h3>Your current events</h3>
         {this.props.reduxState.event.personalCalendar
         ?
         this.props.reduxState.event.personalCalendar.map(event => (
@@ -74,7 +87,7 @@ class AddEvent extends Component {
         <h6>nothing on your calendat yet</h6>
         }
         </>
-        <h2>add new event</h2>
+        <h3>Add new event</h3>
         <label>Date</label>
         <DatePicker
             selected={this.state.date}
@@ -94,12 +107,39 @@ class AddEvent extends Component {
               <option value="25.00">$25</option>
           </select>
         </div>
-        <p>----conditional render----</p>
-        <p>band</p>
-        <p>venue</p>
-        <button onClick={this.console}>submit</button>
+        {this.props.reduxState.user.band === true &&
+        <>
+          <label>Venue</label>
+            <select className="genreList" >
+              {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
+                return <option dropdown={dropdown} key={dropdown.id} value={dropdown.id} onClick={(event) => this.handleChangeSelect(dropdown.id, event)}>
+                {dropdown.name} </option>;
+                })
+              }
+          </select>
+        </>
+        }
+        {this.props.reduxState.user.venue === true &&
+        <>
+          <label>Band</label>
+          <select className="filter" value={this.state.value} onChange={this.select}>
+           {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
+             return <option key={dropdown.id} value={dropdown.name} >
+             {dropdown.name} </option>;
+             })
+           }
+          </select>
+        </>
+        }
         <br/>
-        <h6>dont see the band or venue you want? add here: <button>create</button></h6>
+        <button className="log-in" onClick={this.console}>submit</button>
+        <br/>
+        {this.props.reduxState.user.band === true &&
+          <h6>dont see the venue you want? add here: <button className="log-in" onClick={this.addition}>create</button></h6>
+        }
+        {this.props.reduxState.user.venue === true &&
+          <h6>dont see the band you want? add here: <button className="log-in" onClick={this.addition}>create</button></h6>
+        }
       </>
     )
   }
