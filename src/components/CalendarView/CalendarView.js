@@ -34,9 +34,9 @@ class CalendarView extends Component {
       <>
         <div className=''>
             <h1 className="center" >Upcoming Events</h1>
-            {this.props.reduxState.calendarReducer && (
+            {this.props.reduxState.event.calendarReducer && (
               <div className="calendarView">
-                {this.props.reduxState.calendarReducer.map(event => (
+                {this.props.reduxState.event.calendarReducer.map(event => (
                   <div className="poster" key={event.id}>
                     <img className="inlinePhoto" src={`data:image/png;base64,${event.band_photo}`}  
                     alt='' height="95vh" width="95vmin"

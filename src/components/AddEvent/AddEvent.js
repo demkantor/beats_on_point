@@ -10,9 +10,20 @@ import "react-datepicker/dist/react-datepicker.css";
 
 class AddEvent extends Component {
 
-    state={
-        date: new Date()
+  state={
+    date: new Date(),
+    value: 'Free'
+}
+
+
+  componentDidMount=()=>{
+      const user = this.props.reduxState.user;
+      if(this.props.reduxState.user.band === true){
+        this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'bands'}})
+    }else{
+        this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'venues'}})
     }
+  }
 
     console=()=>{
         let stateDate = this.state.date;
@@ -29,6 +40,17 @@ class AddEvent extends Component {
         }
     }
 
+    filter=(event)=>{
+      this.setState({value: event.target.value});
+    }
+
+    removeEvent=(event)=>{
+      const user = this.props.reduxState.user;
+      console.log('remove event', event);
+      this.props.dispatch({type: 'REMOVE_EVENT', payload: {id: user.id, who: 'bands', eventId: event}})
+    }
+
+
   render() {
     return (
       <>
@@ -36,24 +58,48 @@ class AddEvent extends Component {
       {this.props.reduxState &&
         <h1>Welcome {this.props.reduxState.user.username}</h1>
         }
-        <h1>your current events</h1>
-        <p>display list here <button>X</button></p>
+        <>
+        <h2>your current events</h2>
+        {this.props.reduxState.event.personalCalendar
+        ?
+        this.props.reduxState.event.personalCalendar.map(event => (
+          <div className="poster" key={event.id}>
+            <div>{event.date}</div>
+            <div>{event.time}</div>
+            <div>Tickets {event.cost}</div>
+            <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
+          </div>
+        ))
+        :
+        <h6>nothing on your calendat yet</h6>
+        }
+        </>
         <h2>add new event</h2>
-        <p>Date and Time:</p>
+        <label>Date</label>
         <DatePicker
             selected={this.state.date}
             onChange={(date)=>this.setState({ date })}
             showTimeSelect
             dateFormat="Pp"
         />
-        <p>cost</p>
+        <br/>
+        <div>
+          <label>Cost</label>
+          <select className="filter" onChange={this.filter} value={this.state.value}>
+              <option value="free">Free</option>
+              <option value="5.00">$5</option>
+              <option value="10.00">$10</option>
+              <option value="15.00">$15</option>
+              <option value="20.00">$20</option>
+              <option value="25.00">$25</option>
+          </select>
+        </div>
         <p>----conditional render----</p>
         <p>band</p>
         <p>venue</p>
-        <button>submit</button>
+        <button onClick={this.console}>submit</button>
         <br/>
         <h6>dont see the band or venue you want? add here: <button>create</button></h6>
-        <button onClick={this.console}>console</button>
       </>
     )
   }

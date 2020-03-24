@@ -29,6 +29,15 @@ class LoginPage extends Component {
     });
   }
 
+  hacker=()=>{
+    for(let i=10; i>0; i--){
+      console.log("hacking will commence in", i,"...")
+      if(i===1){
+        console.log("hacking complete.... I'm in!")
+      }
+    }
+  }
+
   render() {
     return (
       <div className="flexContainer">
@@ -77,7 +86,7 @@ class LoginPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'}); this.hacker()}}
           >
             Register
           </button>

@@ -5,6 +5,8 @@ import {takeEvery, put} from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* calendarSaga() {
     yield takeEvery('GET_EVENT_LIST', getEventList);
+    yield takeEvery('GET_MY_CALENDAR', getMyCalendar);
+    yield takeEvery('REMOVE_EVENT', removeEvent);
 }
 
 //gets list of events
@@ -15,6 +17,23 @@ function* getEventList(){
     yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
 }
 
+//get personalized calendar from DB
+function* getMyCalendar(user){
+    console.log("here in personal calendar event GET", user.payload.id, user.payload.who);
+    const eventList = yield axios.get(`/api/calendar/personal/${user.payload.who}/${user.payload.id}`);
+    console.log('in saga - personal calendar GET back with:', eventList.data);
+    yield put({type: 'SET_MY_CALENDAR', payload: eventList.data})
+}
 
+//remove event from calendar
+function* removeEvent(remove) {
+    console.log("in saga event DELETE with: ", remove.payload);
+    try {
+        yield axios.delete(`/api/calendar/personal/${remove.payload.who}/${remove.payload.id}/${remove.payload.eventId}`);
+        yield put({type: 'GET_MY_CALENDAR', payload: remove.payload})
+    } catch(error){
+        console.log(error);
+    }
+}
 
 export default calendarSaga;

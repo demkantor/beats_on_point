@@ -4,7 +4,7 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import lebowskiReducer from './lebowskiReducer';
 import photoReducer from './photoReducer';
-import calendarReducer from './calendarReducer';
+import event from './calendarReducer';
 import currentEvent from './bandVenueReducer';
 import editProfile from './profileEditReducer';
 
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   lebowskiReducer,
   photoReducer,
-  calendarReducer,
+  event,
   currentEvent,
   editProfile,
 });

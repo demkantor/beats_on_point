@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 //store user photo
 const calendarReducer = (state = [], action) => {
     switch (action.type) {
@@ -8,6 +10,17 @@ const calendarReducer = (state = [], action) => {
     }
 }
 
+const personalCalendar = (state=[], action)=>{
+    switch (action.type) {
+        case 'SET_MY_CALENDAR':
+            return state = action.payload;
+        default:
+            return state;
+    }
+}
 
 
-export default calendarReducer;
+export default combineReducers({
+    calendarReducer,
+    personalCalendar
+  });

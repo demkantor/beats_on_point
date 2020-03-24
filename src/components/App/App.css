@@ -162,6 +162,17 @@ footer {
   min-width: 100px;
 }
 
+.filter{
+  cursor: pointer;
+  font-size: large;
+  background-color: #6666CC;
+  border-radius: 4px;
+  color: #f8f8f8;
+  min-height: 23px;
+  min-width: 100px;
+  margin: 2vw;
+}
+
 @keyframes hvr-pulse-grow {
     to {
       -webkit-transform: scale(1.1);
