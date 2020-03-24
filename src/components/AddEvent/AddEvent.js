@@ -4,6 +4,9 @@ import '../App/App.css';
 import {withRouter} from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from 'sweetalert';
+
+
 
 
 
@@ -12,29 +15,49 @@ class AddEvent extends Component {
 
   state={
     date: new Date(),
+    formattedDate: null,
     cost: 'Free',
-    band: null,
-    venue: null,
-
+    bands: null,
+    venues: null,
+    userId: null
 }
 
 
   componentDidMount=()=>{
       const user = this.props.reduxState.user;
+      this.setState({userId: user.id})
       if(this.props.reduxState.user.band === true){
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'bands'}})
         this.props.dispatch({type: 'GET_ALL_VENUES'})
     }else{
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'venues'}})
         this.props.dispatch({type: 'GET_ALL_BANDS'})
+        this.setState({venues: 1})
       }
   }
 
-    console=()=>{
+    newEvent=()=>{
         let stateDate = this.state.date;
         let formatted_date = stateDate.getFullYear() + "-" + (stateDate.getMonth() + 1) + "-" + stateDate.getDate() + " " + stateDate.getHours() + ":" + stateDate.getMinutes() + ":" + stateDate.getSeconds() 
         this.setState({formattedDate: formatted_date})
-        console.log(this.state)
+        console.log('about to send:', this.state)
+        this.props.dispatch({type: 'CREATE_NEW_EVENT', payload: this.state})
+        swal({
+          title: "Create New Event?",
+          text: `${this.state.bands} playing at ${this.state.venue} on ${this.state.formattedDate} for ${this.state.cost}`,
+          icon: "info",
+          buttons: true,
+          dangerMode: false,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success",
+            });
+          } else {
+            swal("Your imaginary file is safe!");
+          }
+        });
     }
 
     editProfile=()=>{
@@ -49,8 +72,8 @@ class AddEvent extends Component {
       this.setState({cost: event.target.value});
     }
 
-    select=(event)=>{
-      this.setState({band: event.target.value});
+    select=(event, propertyName)=>{
+      this.setState({[propertyName]: event.target.value});
     }
 
     removeEvent=(event)=>{
@@ -110,9 +133,9 @@ class AddEvent extends Component {
         {this.props.reduxState.user.band === true &&
         <>
           <label>Venue</label>
-            <select className="genreList" >
+          <select className="filter" value={this.state.value} onChange={(event)=>this.select(event, 'venues')}>
               {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
-                return <option dropdown={dropdown} key={dropdown.id} value={dropdown.id} onClick={(event) => this.handleChangeSelect(dropdown.id, event)}>
+                return <option key={dropdown.id} value={dropdown.id} >
                 {dropdown.name} </option>;
                 })
               }
@@ -122,9 +145,9 @@ class AddEvent extends Component {
         {this.props.reduxState.user.venue === true &&
         <>
           <label>Band</label>
-          <select className="filter" value={this.state.value} onChange={this.select}>
+          <select className="filter" value={this.state.value} onChange={(event)=>this.select(event, 'bands')}>
            {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
-             return <option key={dropdown.id} value={dropdown.name} >
+             return <option key={dropdown.id} value={dropdown.id} >
              {dropdown.name} </option>;
              })
            }
@@ -132,13 +155,13 @@ class AddEvent extends Component {
         </>
         }
         <br/>
-        <button className="log-in" onClick={this.console}>submit</button>
+        <button className="log-in" onClick={this.newEvent}>submit</button>
         <br/>
         {this.props.reduxState.user.band === true &&
-          <h6>dont see the venue you want? add here: <button className="log-in" onClick={this.addition}>create</button></h6>
+          <h5>Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
         }
         {this.props.reduxState.user.venue === true &&
-          <h6>dont see the band you want? add here: <button className="log-in" onClick={this.addition}>create</button></h6>
+          <h5>Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
         }
       </>
     )
