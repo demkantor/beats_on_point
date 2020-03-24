@@ -44,7 +44,6 @@ class CalendarView extends Component {
                     <br />
                     <div className="eventInfo">
                       <div>{event.date}</div>
-                      <div>{event.time}</div>
                       <div>Tickets {event.cost}</div> 
                     </div>
                     <img className="inlinePhoto" src={`data:image/png;base64,${event.venue_photo}`}  

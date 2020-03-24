@@ -6,8 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     console.log('in calendar GET')
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
-    TO_CHAR("date", 'Dy, Mon DD, YY') as "date",
-    TO_CHAR("time", 'hh12:mi AM') as "time",  
+    TO_CHAR("date", 'FMDay, FMDD  HH12:MI am') as "date",  
     ENCODE("bands"."band_photo", 'base64') as "band_photo",
     ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
     FROM "calendar" 
@@ -18,7 +17,7 @@ router.get('/', (req, res) => {
         res.send(result.rows);
     })
     .catch( (error) => {
-        console.log(`Error in photo GET ${error}`);
+        console.log(`Error in full calendar GET ${error}`);
         res.sendStatus(500);
     });
 });
@@ -27,7 +26,7 @@ router.get('/', (req, res) => {
 router.get('/personal/:who/:id', (req, res) => {
     console.log('in personal calendar GET', req.params.who, req.params.id);
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
-    TO_CHAR("date", 'Dy, Mon DD, YY') as "date",
+    TO_CHAR("date", 'FMDay, FMDD  HH12:MI') as "date",
     TO_CHAR("time", 'hh12:mi AM') as "time",  
     ENCODE("bands"."band_photo", 'base64') as "band_photo",
     ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
@@ -40,7 +39,7 @@ router.get('/personal/:who/:id', (req, res) => {
         res.send(result.rows);
     })
     .catch( (error) => {
-        console.log(`Error in photo GET ${error}`);
+        console.log(`Error in personal calendar GET ${error}`);
         res.sendStatus(500);
     });
 });
@@ -59,21 +58,20 @@ router.delete('/personal/:who/:id/:event', (req, res) => {
   });
 
 //post new event to calendar
-router.post('/', (req, res) => {
-    console.log('in calendar POST with', req.params, req.body);
-    // if (req.files === null) {
-    //     return res.status(400).json({ msg: 'No file uploaded' })
-    //   }
-    // const photo = req.files.file;
-    // const userId = req.params.id;
-    // const queryText = `UPDATE "user" SET "photo"=$1 WHERE "id"=$2`;
-    // pool.query(queryText, [photo.data, userId])
-    // .then(() => { res.status(201).json({ name: photo.name, fileType: photo.mimetype, image: photo.data }); })
-    // .catch((err) => {
-    //   console.log('Error completing new photo PUT', err);
-    //   res.sendStatus(500);
-    // });
-    res.sendStatus(200);
+router.post('/add/personal/:id', (req, res) => {
+    console.log('in new eventcalendar POST with', req.params, req.body);
+    const date = req.body.date;
+    const cost = req.body.cost;
+    const band = req.body.bandsId;
+    const venue = req.body.venuesId;
+    const queryText = `INSERT INTO "calendar" ("bands_id", "venues_id", "date", "cost")VALUES ($1, $2, $3, $4)`;
+    pool.query(queryText, [Number(band), Number(venue), date, Number(cost)])
+    .then(() => { 
+        res.sendStatus(201)
+    }).catch((err) => {
+      console.log('Error completing new event PUT', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

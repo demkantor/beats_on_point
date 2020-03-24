@@ -7,6 +7,7 @@ function* calendarSaga() {
     yield takeEvery('GET_EVENT_LIST', getEventList);
     yield takeEvery('GET_MY_CALENDAR', getMyCalendar);
     yield takeEvery('REMOVE_EVENT', removeEvent);
+    yield takeEvery('CREATE_NEW_EVENT', createNewEvent);
 }
 
 //gets list of events
@@ -31,6 +32,17 @@ function* removeEvent(remove) {
     try {
         yield axios.delete(`/api/calendar/personal/${remove.payload.who}/${remove.payload.id}/${remove.payload.eventId}`);
         yield put({type: 'GET_MY_CALENDAR', payload: remove.payload})
+    } catch(error){
+        console.log(error);
+    }
+}
+
+//remove event from calendar
+function* createNewEvent(event) {
+    console.log("in saga add event POST with: ", event.payload);
+    try {
+        yield axios.post(`/api/calendar/add/personal/${event.payload.id}`, event.payload);
+        yield put({type: 'GET_MY_CALENDAR', payload: event.payload})
     } catch(error){
         console.log(error);
     }
