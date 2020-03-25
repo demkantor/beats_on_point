@@ -16,7 +16,7 @@ function* profileEditSaga() {
 function* getThisBand(band){
     // console.log("We are here in band profile GET", band.payload);
     const theBand = yield axios.get(`/api/profile/band/${band.payload}`);
-    // console.log('in saga - band profile GET back with:', theBand.data[0]);
+    console.log('in saga - band profile GET back with:', theBand.data);
     yield put({type: 'SET_THIS_BAND', payload: theBand.data[0]})
 }
 
@@ -24,7 +24,7 @@ function* getThisBand(band){
 function* getThisVenue(venue){
     // console.log("We are here in venue profile GET", venue.payload);
     const theVenue = yield axios.get(`/api/profile/venue/${venue.payload}`);
-    // console.log('in saga - venue profile GET back with:', theVenue.data[0]);
+    console.log('in saga - venue profile GET back with:', theVenue.data);
     yield put({type: 'SET_THIS_VENUE', payload: theVenue.data[0]})
 }
 
@@ -33,7 +33,7 @@ function* editDescription(description){
     // console.log("We are here in edit description saga", description.payload);
     try {
         const theBand = yield axios.put(`/api/profile/description/${description.payload.id}`, description.payload);
-        // console.log('returning from edit description with', theBand);
+        console.log('returning from edit description with', theBand);
         if(description.payload.who ==='bands'){
             yield put({type: 'GET_THIS_BAND', payload: description.payload.userId});
         }else{
@@ -49,7 +49,7 @@ function* editSocialMedia(sm){
     // console.log("We are here in social media edit saga", sm.payload.edit, sm.payload.who, sm.payload.id, sm.payload.type);
     try {
         const socialMedia = yield axios.put(`/api/profile/socialMedia/${sm.payload.id}`, sm.payload);
-        // console.log('returning from band edit description with', socialMedia);
+        console.log('returning from band edit description with', socialMedia);
          if(sm.payload.who ==='bands'){
              yield put({type: 'GET_THIS_BAND', payload: sm.payload.userId});
          }else{
@@ -65,7 +65,7 @@ function* editName(name){
     // console.log("We are here in name edit saga", name.payload.edit, name.payload.who, name.payload.id);
     try {
         const newName = yield axios.put(`/api/profile/name/${name.payload.id}`, name.payload);
-        //  console.log('returning from name edit with', newName);
+        console.log('returning from name edit with', newName);
          if(name.payload.who ==='bands'){
              yield put({type: 'GET_THIS_BAND', payload: name.payload.userId});
          }else{
@@ -81,7 +81,7 @@ function* editDetails(details){
     // console.log("We are here in detail edit saga", details.payload.edit, details.payload.who, details.payload.id);
     try {
         const newDetail = yield axios.put(`/api/profile/details/${details.payload.id}`, details.payload);
-        //  console.log('returning from detail edit with', newDetail);
+        console.log('returning from detail edit with', newDetail);
          if(details.payload.who ==='bands'){
              yield put({type: 'GET_THIS_BAND', payload: details.payload.userId});
          }else{

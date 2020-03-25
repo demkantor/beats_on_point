@@ -43,9 +43,9 @@ class BandEdit extends Component {
     })
   }
 
-  nameEdit=(bandId, type)=>{
+  nameEdit=(bandId, type, current)=>{
     const user = this.props.reduxState.user;
-      swal("Whats in a name....", {
+      swal(`Current: ${current}`, {
         content: "input",
       })
       .then((value) => {
@@ -123,7 +123,7 @@ class BandEdit extends Component {
           <div className="profileViewEdit" key={gig.id}>
               <div className="nameEdit">
                 <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
-                <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name')}/>
+                <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
               </div>    
               <div className="bioPhotoEdit">
                 <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>

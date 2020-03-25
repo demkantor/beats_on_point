@@ -24,7 +24,7 @@ return(
          <form onSubmit={()=>{props.history.push('/'); props.dispatch({type: `NEW_${value}`, payload: props.user.id}); props.dispatch({ type: 'LOGOUT' })}}>
             <input type="radio" name="choose" value="BAND" onChange={()=>setValue('BAND')}/>
             <label htmlFor="BAND">Band</label>
-            <input type="radio" name="choose" value="VENUE" onChange={()=>setValue('BAND')}/>
+            <input type="radio" name="choose" value="VENUE" onChange={()=>setValue('VENUE')}/>
             <label htmlFor="VENUE">Venue</label>
             <input type="radio" name="choose" value="NOPE" onChange={()=>setValue('NOPE')}/>
             <label htmlFor="NOPE">No Thanks</label>

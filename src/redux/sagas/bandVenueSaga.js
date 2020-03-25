@@ -15,7 +15,7 @@ function* bandVenueSaga() {
 
 //gets the current band from DB
 function* getTheBand(band){
-    console.log("We are here in band GET", band.payload);
+    // console.log("We are here in band GET", band.payload);
     const theBand = yield axios.get(`/api/event/band/${band.payload}`);
     console.log('in saga - band GET back with:', theBand.data);
     yield put({type: 'SET_THE_BAND', payload: theBand.data[0]})
@@ -23,7 +23,7 @@ function* getTheBand(band){
 
 //gets the current venue from DB
 function* getTheVenue(venue){
-    console.log("We are here in venue GET", venue.payload);
+    // console.log("We are here in venue GET", venue.payload);
     const theVenue = yield axios.get(`/api/event/venue/${venue.payload}`);
     console.log('in saga - venue GET back with:', theVenue.data);
     yield put({type: 'SET_THE_VENUE', payload: theVenue.data[0]})
@@ -31,7 +31,7 @@ function* getTheVenue(venue){
 
 //gets all bands from DB
 function* getAllBands(){
-    console.log("We are here in all bands GET");
+    // console.log("We are here in all bands GET");
     const allBands = yield axios.get(`/api/event/all/bands`);
     console.log('in saga - all bands GET back with:', allBands.data);
     yield put({type: 'SET_ALL_BANDS', payload: allBands.data})
@@ -39,7 +39,7 @@ function* getAllBands(){
 
 //gets all venues from DB
 function* getAllVenues(){
-    console.log("We are here in venue GET");
+    // console.log("We are here in venue GET");
     const allVenues = yield axios.get(`/api/event/all/venues`);
     console.log('in saga - venue GET back with:', allVenues.data);
     yield put({type: 'SET_ALL_VENUES', payload: allVenues.data})

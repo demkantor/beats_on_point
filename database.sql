@@ -14,26 +14,27 @@ CREATE TABLE "user" (
 
 CREATE TABLE "venues" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(120),
+  "name" varchar(120) DEFAULT 'add venue name',
   "user_name_id" int,
-  "address" varchar(120),
-  "description" varchar,
-  "twitter" varchar,
-  "facebook" varchar,
-  "www" varchar,
-  "youtube" varchar,
+  "address" varchar(120) DEFAULT 'add address',
+  "phone" varchar(30) DEFAULT 'add phone number'
+  "description" varchar DEFAULT 'add bio',
+  "twitter" varchar DEFAULT 'add twitter link',
+  "facebook" varchar DEFAULT 'add facebook link',
+  "www" varchar DEFAULT 'add website link',
+  "youtube" varchar DEFAULT 'add youtube link',
   "venue_photo" bytea
 );
 
 CREATE TABLE "bands" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(100),
+  "name" varchar(100) DEFAULT 'add band name',
   "user_name_id" int,
-  "description" varchar,
-  "twitter" varchar,
-  "facebook" varchar,
-  "www" varchar,
-  "youtube" varchar,
+  "description" varchar DEFAULT 'add bio',
+  "twitter" varchar DEFAULT 'add twitter link',
+  "facebook" varchar DEFAULT 'add facebook link',
+  "www" varchar DEFAULT 'add website link',
+  "youtube" varchar DEFAULT 'add youtube link',
   "band_photo" bytea
 );
 
@@ -41,8 +42,7 @@ CREATE TABLE "calendar" (
   "id" SERIAL PRIMARY KEY,
   "bands_id" int,
   "venues_id" int,
-  "date" date NOT NULL DEFAULT CURRENT_DATE,
-  "time" TIME NOT NULL DEFAULT CURRENT_TIME,
+  "date" TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
   "cost" int
 );
 
