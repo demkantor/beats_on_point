@@ -12,31 +12,33 @@ class BandView extends Component {
     }
 
   render() {
+    const gig = this.props.reduxState.currentEvent.bandReducer;
     return (
       <>
         <div className='bandView'>
           <button className="log-in" onClick={()=>this.props.history.push('/calendar-view')}>Return To Calendar</button>
-            {this.props.reduxState.currentEvent.bandReducer
-            && (
-            <>
-                {this.props.reduxState.currentEvent.bandReducer.map(gig => (
-                <div className="bandView" key={gig.id}>
-                  <div className="bioBanner">{gig.name}</div>
-                  <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
-                  <br />
-                  <div className="bioDescription">
-                    {gig.description}
-                  </div>
-                  <div className="socialMedia">
+            <div className="bandView" key={gig.id}>
+              <div className="bioBanner">{gig.name}</div>
+              <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+              <br />
+              <div className="bioDescription">
+                {gig.description}
+              </div>
+                <div className="socialMedia">
+                  <a href={gig.twitter} target="_blank" rel="noreferrer noopener">
                     <img className="linkIcons" src="/images/twitter.png" alt={gig.twitter}/>
+                  </a>
+                  <a href={gig.facebook} target="_blank" rel="noreferrer noopener">
                     <img className="linkIcons" src="/images/facebook.png" alt={gig.facebook}/>
+                  </a>
+                  <a href={gig.www} target="_blank" rel="noreferrer noopener">
                     <img className="linkIcons" src="/images/www.png" alt={gig.www}/>
+                  </a>  
+                  <a href={gig.youtube} target="_blank" rel="noreferrer noopener">
                     <img className="linkIcons" src="/images/youtube.png" alt={gig.youtube}/>
-                  </div>
+                  </a>
                 </div>
-              ))}
-            </>
-            )}
+            </div>
         </div>
       </>
     )

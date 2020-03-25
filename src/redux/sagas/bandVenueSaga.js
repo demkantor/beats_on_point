@@ -18,7 +18,7 @@ function* getTheBand(band){
     console.log("We are here in band GET", band.payload);
     const theBand = yield axios.get(`/api/event/band/${band.payload}`);
     console.log('in saga - band GET back with:', theBand.data);
-    yield put({type: 'SET_THE_BAND', payload: theBand.data})
+    yield put({type: 'SET_THE_BAND', payload: theBand.data[0]})
 }
 
 //gets the current venue from DB
@@ -26,7 +26,7 @@ function* getTheVenue(venue){
     console.log("We are here in venue GET", venue.payload);
     const theVenue = yield axios.get(`/api/event/venue/${venue.payload}`);
     console.log('in saga - venue GET back with:', theVenue.data);
-    yield put({type: 'SET_THE_VENUE', payload: theVenue.data})
+    yield put({type: 'SET_THE_VENUE', payload: theVenue.data[0]})
 }
 
 //gets all bands from DB

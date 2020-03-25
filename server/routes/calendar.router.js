@@ -6,12 +6,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
     console.log('in calendar GET')
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
-    TO_CHAR("date", 'FMDay, FMDD  HH12:MI am') as "date",  
+    TO_CHAR("date", 'YY-MM-DD HH12:MI') as "order_date",
+    TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date",  
     ENCODE("bands"."band_photo", 'base64') as "band_photo",
     ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
     FROM "calendar" 
     JOIN "bands" ON "bands"."id" = "calendar"."bands_id"
-    JOIN "venues" ON "venues"."id" = "calendar"."venues_id";`;
+    JOIN "venues" ON "venues"."id" = "calendar"."venues_id"
+    ORDER BY "order_date" ASC;`;
     pool.query(queryText)
     .then( (result) => {
         res.send(result.rows);
@@ -26,14 +28,17 @@ router.get('/', (req, res) => {
 router.get('/personal/:who/:id', (req, res) => {
     console.log('in personal calendar GET', req.params.who, req.params.id);
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
-    TO_CHAR("date", 'FMDay, FMDD  HH12:MI') as "date",
-    TO_CHAR("time", 'hh12:mi AM') as "time",  
+    TO_CHAR("date", 'YY-MM-DD HH12:MI') as "order_date", 
+    TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date", 
     ENCODE("bands"."band_photo", 'base64') as "band_photo",
-    ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
+    ENCODE("venues"."venue_photo", 'base64') as "venue_photo",
+    "bands"."name" as band_name,
+    "venues"."name" as venue_name
     FROM "calendar" 
     JOIN "bands" ON "bands"."id" = "calendar"."bands_id"
     JOIN "venues" ON "venues"."id" = "calendar"."venues_id"
-    WHERE ${req.params.who}."user_name_id" = ${req.params.id};`;
+    WHERE ${req.params.who}."user_name_id" = ${req.params.id}
+    ORDER BY "order_date" ASC;`;
     pool.query(queryText)
     .then( (result) => {
         res.send(result.rows);
@@ -69,7 +74,7 @@ router.post('/add/personal/:id', (req, res) => {
     .then(() => { 
         res.sendStatus(201)
     }).catch((err) => {
-      console.log('Error completing new event PUT', err);
+      console.log('Error completing new event POST', err);
       res.sendStatus(500);
     });
 });

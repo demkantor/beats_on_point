@@ -16,7 +16,7 @@ class AddEvent extends Component {
   state={
     date: new Date(),
     formattedDate: null,
-    cost: 'Free',
+    cost: 0,
     bands: null,
     bandsId: null,
     venues: null,
@@ -33,25 +33,22 @@ class AddEvent extends Component {
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'bands'}})
         this.props.dispatch({type: 'GET_ALL_VENUES'})
         this.props.dispatch({type: 'GET_THIS_BAND', payload: this.props.reduxState.user.id})
-        this.setState({bands: this.props.reduxState.editProfile.editBandReducer[0].name})
-        this.setState({bandsID: this.props.reduxState.editProfile.editBandReducer[0].id})
+        this.setState({bands: this.props.reduxState.editProfile.editBandReducer.name})
+        this.setState({bandsId: this.props.reduxState.editProfile.editBandReducer.id})
         this.setState({who: 'bands'})
     }else{
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'venues'}})
         this.props.dispatch({type: 'GET_ALL_BANDS'});
         this.props.dispatch({type: 'GET_THIS_VENUE', payload: this.props.reduxState.user.id})
-        this.setState({venues: this.props.reduxState.editProfile.editVenueReducer[0].name})
-        this.setState({venuesId: this.props.reduxState.editProfile.editVenueReducer[0].id})
+        this.setState({venues: this.props.reduxState.editProfile.editVenueReducer.name})
+        this.setState({venuesId: this.props.reduxState.editProfile.editVenueReducer.id})
         this.setState({who: 'venues'})
       }
   }
 
     selectDate=(date)=>{
       this.setState({date})
-      let stateDate = this.state.date;
-      let formatted_date = stateDate.getFullYear() + "-" + (stateDate.getMonth() + 1) + "-" + stateDate.getDate() + " " + stateDate.getHours() + ":" + stateDate.getMinutes() + ":" + stateDate.getSeconds() 
-      this.setState({formattedDate: formatted_date})
-          console.log('about to send:', this.state);
+          console.log('packing state:', this.state);
     }
 
     newEvent=()=>{
@@ -92,7 +89,7 @@ class AddEvent extends Component {
     }
 
     selectVenue=(event)=>{
-      this.setState({venues: event.target.value});
+      this.setState({venuesId: event.target.value});
     }
 
     removeEvent=(event)=>{
@@ -110,24 +107,48 @@ class AddEvent extends Component {
     return (
       <>
       <button className="log-in" onClick={this.editProfile}>edit profile</button>
-      {this.props.reduxState &&
-        <h1>Welcome {this.props.reduxState.user.username}</h1>
-        }
+
+      <h1>Welcome {this.props.reduxState.user.username}</h1>
+      {this.props.reduxState.user.band === true &&
         <>
         <h3>Your current events</h3>
         {this.props.reduxState.event.personalCalendar
         ?
         this.props.reduxState.event.personalCalendar.map(event => (
           <div className="poster" key={event.id}>
+            <div>{event.venue_name}</div>
             <div>{event.date}</div>
             <div>Tickets {event.cost}</div>
             <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
           </div>
         ))
         :
-        <h6>nothing on your calendat yet</h6>
+        <h6>Nothing on your calendat yet</h6>
         }
         </>
+        }
+
+        {this.props.reduxState.user.venue === true &&
+        <>
+        <h3>Your current events</h3>
+        {this.props.reduxState.event.personalCalendar
+        ?
+        this.props.reduxState.event.personalCalendar.map(event => (
+          <div className="poster" key={event.id}>
+            <div>{event.band_name}</div>
+            <div>{event.date}</div>
+            <div>Tickets {event.cost}</div>
+            <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
+          </div>
+        ))
+        :
+        <h6>Nothing on your calendat yet</h6>
+        }
+        </>
+        }
+
+
+
         <h3>Add new event</h3>
         <label>Date</label>
         <DatePicker
@@ -140,7 +161,7 @@ class AddEvent extends Component {
         <div>
           <label>Cost</label>
           <select className="filter" onChange={this.filter} value={this.state.value}>
-              <option value="free">Free</option>
+              <option value="0">Free</option>
               <option value="5.00">$5</option>
               <option value="10.00">$10</option>
               <option value="15.00">$15</option>
@@ -151,11 +172,12 @@ class AddEvent extends Component {
         {this.props.reduxState.user.band === true &&
         <>
           <label>Venue</label>
-          <select className="filter" value={this.state.value} onChange={this.selectVenue}>
+          <select className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectVenue}>
               {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
-                return <option key={dropdown.id} value={dropdown.name} >
-                {dropdown.name} </option>;
-                })
+                return (
+                  <option onClick={()=>this.setState({venues: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
+                  {dropdown.name}</option>
+                )})
               }
           </select>
         </>
