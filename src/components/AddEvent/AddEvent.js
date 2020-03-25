@@ -9,13 +9,10 @@ import swal from 'sweetalert';
 
 
 
-
-
 class AddEvent extends Component {
 
   state={
     date: new Date(),
-    formattedDate: null,
     cost: 0,
     bands: null,
     bandsId: null,
@@ -23,8 +20,11 @@ class AddEvent extends Component {
     venuesId: null,
     id: null,
     who: null
-}
+  }
 
+  addition=()=>{
+    console.log('adding your friends')
+  }
 
   componentDidMount=()=>{
       const user = this.props.reduxState.user;
@@ -46,164 +46,156 @@ class AddEvent extends Component {
       }
   }
 
-    selectDate=(date)=>{
-      this.setState({date})
-          console.log('packing state:', this.state);
-    }
+  editProfile=()=>{
+      if(this.props.reduxState.user.band === true){
+          this.props.history.push('/band-edit')
+      }else{
+          this.props.history.push('/venue-edit')
+      }
+  }
 
-    newEvent=()=>{
-      let objectToSend = this.state;
-        swal({
-          title: "Create New Event?",
-          text: `${this.state.bands} playing at ${this.state.venues} on ${this.state.date} for ${this.state.cost}`,
-          icon: "info",
-          buttons: true,
-          dangerMode: false,
+  filter=(event)=>{
+    this.setState({cost: event.target.value});
+  }
+
+  newEvent=()=>{
+    let objectToSend = this.state;
+    swal({
+      title: "Create New Event?",
+      text: `${this.state.bands} playing at ${this.state.venues} on ${this.state.date} for ${this.state.cost}`,
+      icon: "info",
+      buttons: true,
+      dangerMode: false,
+    })
+    .then((keep) => {
+      if (keep) {
+        swal("Your new event has been added to the calendar!", {
+          icon: "success",
         })
-        .then((keep) => {
-          if (keep) {
-            swal("Your new event has been added to the calendar!", {
-              icon: "success",
-            })
-            this.props.dispatch({type: 'CREATE_NEW_EVENT', payload: objectToSend})
-          } else {
-            swal("cool, not adding event");
-          }
-        });
-    }
+        this.props.dispatch({type: 'CREATE_NEW_EVENT', payload: objectToSend})
+      } else {
+        swal("cool, not adding event");
+      }
+    });
+  }
 
-    editProfile=()=>{
-        if(this.props.reduxState.user.band === true){
-            this.props.history.push('/band-edit')
-        }else{
-            this.props.history.push('/venue-edit')
-        }
-    }
+  removeEvent=(event)=>{
+    const user = this.props.reduxState.user;
+    // console.log('remove event', event);
+    this.props.dispatch({type: 'REMOVE_EVENT', payload: {id: user.id, who: 'bands', eventId: event}})
+  }
 
-    filter=(event)=>{
-      this.setState({cost: event.target.value});
-    }
+  selectBand=(event)=>{
+    this.setState({bandsId: event.target.value});
+  }
 
-    selectBand=(event)=>{
-      this.setState({bandsId: event.target.value});
-    }
+  selectDate=(date)=>{
+    this.setState({date})
+        // console.log('packing state:', this.state);
+  }
 
-    selectVenue=(event)=>{
-      this.setState({venuesId: event.target.value});
-    }
+  selectVenue=(event)=>{
+    this.setState({venuesId: event.target.value});
+  }
 
-    removeEvent=(event)=>{
-      const user = this.props.reduxState.user;
-      console.log('remove event', event);
-      this.props.dispatch({type: 'REMOVE_EVENT', payload: {id: user.id, who: 'bands', eventId: event}})
-    }
-
-    addition=()=>{
-      console.log('adding your friends')
-    }
-
-
+    
   render() {
     return (
       <>
-      <button className="log-in" onClick={this.editProfile}>edit profile</button>
-
-      <h1>Welcome {this.props.reduxState.user.username}</h1>
-      {this.props.reduxState.user.band === true &&
-        <>
-        <h3>Your current events</h3>
-        {this.props.reduxState.event.personalCalendar
-        ?
-        this.props.reduxState.event.personalCalendar.map(event => (
-          <div className="poster" key={event.id}>
-            <div>{event.venue_name}</div>
-            <div>{event.date}</div>
-            <div>Tickets {event.cost}</div>
-            <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
-          </div>
-        ))
-        :
-        <h6>Nothing on your calendat yet</h6>
-        }
-        </>
-        }
-
-        {this.props.reduxState.user.venue === true &&
-        <>
-        <h3>Your current events</h3>
-        {this.props.reduxState.event.personalCalendar
-        ?
-        this.props.reduxState.event.personalCalendar.map(event => (
-          <div className="poster" key={event.id}>
-            <div>{event.band_name}</div>
-            <div>{event.date}</div>
-            <div>Tickets {event.cost}</div>
-            <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
-          </div>
-        ))
-        :
-        <h6>Nothing on your calendat yet</h6>
-        }
-        </>
-        }
-
-
-
-        <h3>Add new event</h3>
-        <label>Date</label>
-        <DatePicker
-            selected={this.state.date}
-            onChange={(date)=>this.selectDate(date)}
-            showTimeSelect
-            dateFormat="Pp"
-        />
-        <br/>
-        <div>
-          <label>Cost</label>
-          <select className="filter" onChange={this.filter} value={this.state.value}>
-              <option value="0">Free</option>
-              <option value="5.00">$5</option>
-              <option value="10.00">$10</option>
-              <option value="15.00">$15</option>
-              <option value="20.00">$20</option>
-              <option value="25.00">$25</option>
-          </select>
-        </div>
+        <button className="log-in" onClick={this.editProfile}>edit profile</button>
+        <h1>Welcome {this.props.reduxState.user.username}</h1>
         {this.props.reduxState.user.band === true &&
-        <>
-          <label>Venue</label>
-          <select className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectVenue}>
-              {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
-                return (
-                  <option onClick={()=>this.setState({venues: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
-                  {dropdown.name}</option>
-                )})
-              }
-          </select>
-        </>
+          <>
+            <h3>Your current events</h3>
+            {this.props.reduxState.event.personalCalendar
+            ?
+            this.props.reduxState.event.personalCalendar.map(event => (
+              <div className="poster" key={event.id}>
+                <div>{event.venue_name}</div>
+                <div>{event.date}</div>
+                <div>Tickets {event.cost}</div>
+                <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
+              </div>
+            ))
+            :
+            <h6>Nothing on your calendat yet</h6>
+            }
+          </>
         }
         {this.props.reduxState.user.venue === true &&
-        <>
-          <label>Band</label>
-          <select className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectBand}>
-           {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
-             return (
-             <option onClick={()=>this.setState({bands: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
-             {dropdown.name}</option>
-           )})
-           }
-          </select>
-        </>
-        }
-        <br/>
-        <button className="log-in" onClick={this.newEvent}>submit</button>
-        <br/>
-        {this.props.reduxState.user.band === true &&
-          <h5>Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
-        }
-        {this.props.reduxState.user.venue === true &&
-          <h5>Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
-        }
+          <>
+            <h3>Your current events</h3>
+            {this.props.reduxState.event.personalCalendar
+            ?
+            this.props.reduxState.event.personalCalendar.map(event => (
+              <div className="poster" key={event.id}>
+                <div>{event.band_name}</div>
+                <div>{event.date}</div>
+                <div>Tickets {event.cost}</div>
+                <button className="deleteButton" onClick={()=>this.removeEvent(event.id)}>X</button>
+              </div>
+            ))
+            :
+            <h6>Nothing on your calendat yet</h6>
+            }
+          </>
+          }
+          <h3>Add new event</h3>
+          <label htmlFor="pick-date" >Date</label>
+          <DatePicker
+              name="pick-date"
+              selected={this.state.date}
+              onChange={(date)=>this.selectDate(date)}
+              showTimeSelect
+              dateFormat="Pp"
+          />
+          <br/>
+          <div>
+            <label htmlFor="cost" >Cost</label>
+            <select name="cost" className="filter" onChange={this.filter} value={this.state.value}>
+                <option value="0">Free</option>
+                <option value="5.00">$5</option>
+                <option value="10.00">$10</option>
+                <option value="15.00">$15</option>
+                <option value="20.00">$20</option>
+                <option value="25.00">$25</option>
+            </select>
+          </div>
+          {this.props.reduxState.user.band === true &&
+          <>
+            <label htmlFor="venue">Venue</label>
+            <select name="venue" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectVenue}>
+                {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
+                  return (
+                    <option onClick={()=>this.setState({venues: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
+                    {dropdown.name}</option>
+                  )})
+                }
+            </select>
+          </>
+          }
+          {this.props.reduxState.user.venue === true &&
+          <>
+            <label htmlFor="band" >Band</label>
+            <select name="band" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectBand}>
+            {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
+              return (
+              <option onClick={()=>this.setState({bands: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
+              {dropdown.name}</option>
+            )})
+            }
+            </select>
+          </>
+          }
+          <br/>
+          <button className="log-in" onClick={this.newEvent}>submit</button>
+          <br/>
+          {this.props.reduxState.user.band === true &&
+            <h5>Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+          }
+          {this.props.reduxState.user.venue === true &&
+            <h5>Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+          }
       </>
     )
   }
@@ -213,4 +205,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default withRouter(connect(putReduxStateOnProps)(AddEvent));
+export default withRouter(connect(putReduxStateOnProps)(AddEvent));

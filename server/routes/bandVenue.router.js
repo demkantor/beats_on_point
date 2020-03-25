@@ -4,7 +4,7 @@ const router = express.Router();
 
 //get current band request
 router.get('/band/:id', (req, res) => {
-    console.log('in band GET with id:', req.params.id)
+    // console.log('in band GET with id:', req.params.id)
     const queryText = `SELECT "id", "name", "description", "twitter", "facebook", "www", "youtube", 
     ENCODE(band_photo, 'base64') as photo FROM "bands" WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
@@ -19,7 +19,7 @@ router.get('/band/:id', (req, res) => {
 
 //get current venue request
 router.get('/venue/:id', (req, res) => {
-    console.log('in venue GET with id:', req.params.id)
+    // console.log('in venue GET with id:', req.params.id)
     const queryText = `SELECT "id", "name", "description", "address", "twitter", "facebook", "www", "youtube", 
     ENCODE(venue_photo, 'base64') as photo FROM "venues" WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
@@ -34,7 +34,7 @@ router.get('/venue/:id', (req, res) => {
 
 //gets all bands
 router.get('/all/bands', (req, res) => {
-    console.log('in all bands GET')
+    // console.log('in all bands GET')
     const queryText = `SELECT * FROM "bands";`;
     pool.query(queryText)
     .then( (result) => {
@@ -48,7 +48,7 @@ router.get('/all/bands', (req, res) => {
 
 //get all venues
 router.get('/all/venues', (req, res) => {
-    console.log('in all venues GET')
+    // console.log('in all venues GET')
     const queryText = `SELECT * FROM "venues";`;
     pool.query(queryText)
     .then( (result) => {
