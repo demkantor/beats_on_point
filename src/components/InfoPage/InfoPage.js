@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
-
+//this page needs some edit work, currently is how a regular user equests to be a band or venue
 
 const InfoPage = (props) => {
   const [value, setValue] = useState('');

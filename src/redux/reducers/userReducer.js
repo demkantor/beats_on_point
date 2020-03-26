@@ -1,3 +1,4 @@
+// stores info on who is signed in
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':

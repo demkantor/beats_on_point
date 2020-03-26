@@ -2,9 +2,9 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-//get calendar events
+//get all calendar events
 router.get('/', (req, res) => {
-    console.log('in calendar GET')
+    // console.log('in calendar GET')
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
     TO_CHAR("date", 'YY-MM-DD HH12:MI') as "order_date",
     TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date",  
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 //get personal calendar events
 router.get('/personal/:who/:id', (req, res) => {
-    console.log('in personal calendar GET', req.params.who, req.params.id);
+    // console.log('in personal calendar GET', req.params.who, req.params.id);
     const queryText = `SELECT "calendar"."id", "bands_id", "venues_id", "cost",
     TO_CHAR("date", 'YY-MM-DD HH12:MI') as "order_date", 
     TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date", 
@@ -51,7 +51,7 @@ router.get('/personal/:who/:id', (req, res) => {
 
 //delete event from calendar
 router.delete('/personal/:who/:id/:event', (req, res) => {
-    console.log('in personal calendar DELETE', req.params.who, req.params.id, req.params.event);
+    // console.log('in personal calendar DELETE', req.params.who, req.params.id, req.params.event);
     const queryText = `DELETE FROM "calendar" WHERE id=$1`;
     pool.query(queryText, [Number(req.params.event)])
     .then(() => {
@@ -64,7 +64,7 @@ router.delete('/personal/:who/:id/:event', (req, res) => {
 
 //post new event to calendar
 router.post('/add/personal/:id', (req, res) => {
-    console.log('in new eventcalendar POST with', req.params, req.body);
+    // console.log('in new eventcalendar POST with', req.params, req.body);
     const date = req.body.date;
     const cost = req.body.cost;
     const band = req.body.bandsId;

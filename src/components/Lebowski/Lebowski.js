@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-
+//404 landing page, just calls a simple api to gether quotes from the big lebowski
 class Lebowski extends Component {
 
   //bring in list of images stored in postgres made available by redux
@@ -44,4 +44,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default connect(putReduxStateOnProps)(Lebowski);
+export default connect(putReduxStateOnProps)(Lebowski);

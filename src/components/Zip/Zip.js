@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-
+//currently an unused component, may hold it for gmaps location approval
 class Zip extends Component {
 
 state={
@@ -38,4 +38,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default connect(putReduxStateOnProps)(Zip);
+export default connect(putReduxStateOnProps)(Zip);

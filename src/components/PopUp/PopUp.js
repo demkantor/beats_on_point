@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import '../App/App.css';
 
+
+// curently unused component, this is to make a popUp modal thats reuseable
+
 //also will need to import this component where used
 
 

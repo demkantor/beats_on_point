@@ -4,30 +4,30 @@ import '../App/App.css';
 import {withRouter} from 'react-router-dom'
 
 
-
+//displays full calendar event list
 class CalendarView extends Component {
 
-    componentDidMount=()=>{
-        this.props.dispatch({type: 'GET_EVENT_LIST'});
-    }
+  componentDidMount=()=>{
+      this.props.dispatch({type: 'GET_EVENT_LIST'});
+  }
    
-    bandInfo=(id)=>{
-      console.log('you clickd on band info to event', id);
-      this.props.history.push({
-        pathname: '/band-view',
-        payload: id
-      })
-      this.props.dispatch({type: 'GET_THE_BAND', payload: id})
-    }
+  bandInfo=(id)=>{
+    // console.log('you clickd on band info to event', id);
+    this.props.history.push({
+      pathname: '/band-view',
+      payload: id
+    })
+    this.props.dispatch({type: 'GET_THE_BAND', payload: id})
+  }
 
-    venueInfo=(id)=>{
-      console.log('you clicked on venue info', id);
-      this.props.history.push({
-        pathname: '/venue-view',
-        payload: id
-      })
-      this.props.dispatch({type: 'GET_THE_VENUE', payload: id})
-    }
+  venueInfo=(id)=>{
+    // console.log('you clicked on venue info', id);
+    this.props.history.push({
+      pathname: '/venue-view',
+      payload: id
+    })
+    this.props.dispatch({type: 'GET_THE_VENUE', payload: id})
+  }
 
   render() {
     return (
@@ -63,4 +63,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default withRouter(connect(putReduxStateOnProps)(CalendarView));
+export default withRouter(connect(putReduxStateOnProps)(CalendarView));

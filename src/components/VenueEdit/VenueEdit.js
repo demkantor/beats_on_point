@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import swal from 'sweetalert';
 
 
-
+//this component allows venues to edit thier profile
 class VenueEdit extends Component {
 
   addressEdit=(venueId, type, current)=>{

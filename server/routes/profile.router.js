@@ -116,7 +116,7 @@ router.post('/new/band/:id', (req, res) => {
 
 //turn user into a new venue
 router.post('/new/venue/:id', (req, res) => {
-    console.log('in new venue POST with', req.params);
+    // console.log('in new venue POST with', req.params);
     const queryText = `INSERT INTO "venues" ("user_name_id") VALUES ($1);`;
     pool.query(queryText, [Number(req.params.id)])
     .then(() => { console.log('user id posted to venues table')

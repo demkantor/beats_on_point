@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../App/App.css';
 import {withRouter} from 'react-router-dom';
+import Gmaps from '../Gmaps/Gmaps';
 
-
+//this component is for how a venue looks to all users
 class VenueView extends Component {
 
 
-    componentDidMount=()=>{
-      let id = this.props.history.location.payload;
-      this.props.dispatch({type: 'GET_THE_VENUE', payload: id});
-    }
+  componentDidMount=()=>{
+    let id = this.props.history.location.payload;
+    this.props.dispatch({type: 'GET_THE_VENUE', payload: id});
+  }
 
   render() {
     const gig = this.props.reduxState.currentEvent.venueReducer;
@@ -29,7 +30,10 @@ class VenueView extends Component {
             <div className="bioDescription">
               {gig.description}
             </div>
-            
+            <div className="mapContainer">
+            <Gmaps
+            />
+            </div>
             <div className="socialMedia">
               <a href={gig.twitter} target="_blank" rel="noreferrer noopener">
                 <img className="linkIcons" src="/images/twitter.png" alt={gig.twitter}/>
@@ -55,4 +59,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default withRouter(connect(putReduxStateOnProps)(VenueView));
+export default withRouter(connect(putReduxStateOnProps)(VenueView));

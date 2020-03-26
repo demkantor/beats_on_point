@@ -4,7 +4,7 @@ const router = express.Router();
 
 //get user photo
 router.get('/:id', (req, res) => {
-    console.log('in photo GET with id:', req.params.id)
+    // console.log('in photo GET with id:', req.params.id)
     const queryText = `SELECT ENCODE(photo, 'base64') FROM "user" WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
     .then( (result) => {

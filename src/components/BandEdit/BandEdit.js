@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import Swal from 'sweetalert2'
 
 
-
+//page for logged in band to edit profile
 class BandEdit extends Component {
 
   componentDidMount=()=>{

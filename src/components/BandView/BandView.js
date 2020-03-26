@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-
+//shows the selectedd band's bio page
 class BandView extends Component {
 
-    componentDidMount=()=>{
-      let id = this.props.history.location.payload;
-        this.props.dispatch({type: 'GET_THE_BAND', payload: id});
-    }
+  componentDidMount=()=>{
+    let id = this.props.history.location.payload;
+      this.props.dispatch({type: 'GET_THE_BAND', payload: id});
+  }
 
   render() {
     const gig = this.props.reduxState.currentEvent.bandReducer;
@@ -49,4 +49,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default connect(putReduxStateOnProps)(BandView);
+export default connect(putReduxStateOnProps)(BandView);

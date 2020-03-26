@@ -9,6 +9,7 @@ import SignInSuccess from '../SignInSuccess/SignInSuccess';
 
 const UserPage = (props) => {
   
+  //preloads band / venue info
   if(props.user.band === true){
     props.dispatch({type: 'GET_THIS_BAND', payload: props.user.id})
   }else{
@@ -16,8 +17,7 @@ const UserPage = (props) => {
   }
   
   return (
-  <>
-      
+      <>
         <div className="welcomeFriend">
           <h1 id="welcome">
             Welcome, { props.user.username }!
@@ -27,7 +27,6 @@ const UserPage = (props) => {
           ''
           <LogOutButton className="log-in btnFix" />
           <SignInSuccess /> 
-          
         </div>
       </>
     );

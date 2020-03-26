@@ -51,7 +51,6 @@ const Nav = (props) => (
             onClick={()=>props.history.push('/calendar-edit')}
           />
         </>
-        
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/calendar-view">

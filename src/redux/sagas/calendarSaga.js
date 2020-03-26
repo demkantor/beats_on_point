@@ -10,9 +10,9 @@ function* calendarSaga() {
     yield takeEvery('CREATE_NEW_EVENT', createNewEvent);
 }
 
-//gets list of events
+//gets list of all events
 function* getEventList(){
-    console.log("We are here in calendar event GET");
+    // console.log("We are here in calendar event GET");
     const eventList = yield axios.get('/api/calendar');
     console.log('in saga - calendar event GET back with:', eventList.data);
     yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
@@ -20,7 +20,7 @@ function* getEventList(){
 
 //get personalized calendar from DB
 function* getMyCalendar(user){
-    console.log("here in personal calendar event GET", user.payload.id, user.payload.who);
+    // console.log("here in personal calendar event GET", user.payload.id, user.payload.who);
     const eventList = yield axios.get(`/api/calendar/personal/${user.payload.who}/${user.payload.id}`);
     console.log('in saga - personal calendar GET back with:', eventList.data);
     yield put({type: 'SET_MY_CALENDAR', payload: eventList.data})
@@ -28,7 +28,7 @@ function* getMyCalendar(user){
 
 //remove event from calendar
 function* removeEvent(remove) {
-    console.log("in saga event DELETE with: ", remove.payload);
+    //console.log("in saga event DELETE with: ", remove.payload);
     try {
         yield axios.delete(`/api/calendar/personal/${remove.payload.who}/${remove.payload.id}/${remove.payload.eventId}`);
         yield put({type: 'GET_MY_CALENDAR', payload: remove.payload})
@@ -37,9 +37,9 @@ function* removeEvent(remove) {
     }
 }
 
-//remove event from calendar
+//create new event in calendar
 function* createNewEvent(event) {
-    console.log("in saga add event POST with: ", event.payload);
+    // console.log("in saga add event POST with: ", event.payload);
     try {
         yield axios.post(`/api/calendar/add/personal/${event.payload.id}`, event.payload);
         yield put({type: 'GET_MY_CALENDAR', payload: event.payload})

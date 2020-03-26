@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-
+//currently unused component, leftover from orginal draft
 class Shows extends Component {
 
     state={
@@ -13,7 +13,6 @@ class Shows extends Component {
     filter=(event)=>{
         this.setState({value: event.target.value});
     }
-
 
   render() {
     return (
@@ -36,4 +35,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
   });
   
-  export default connect(putReduxStateOnProps)(Shows);
+export default connect(putReduxStateOnProps)(Shows);

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-//store user photo
+//stores calendar event list
 const calendarReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_EVENT_LIST':
@@ -10,6 +10,7 @@ const calendarReducer = (state = [], action) => {
     }
 }
 
+// stores personal calendar events
 const personalCalendar = (state=[], action)=>{
     switch (action.type) {
         case 'SET_MY_CALENDAR':

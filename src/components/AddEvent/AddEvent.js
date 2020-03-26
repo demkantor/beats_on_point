@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 
 
 
-
+//page for bands and venues to add new events, landing page when band/venue logs in
 class AddEvent extends Component {
 
   state={
@@ -22,6 +22,7 @@ class AddEvent extends Component {
     who: null
   }
 
+  //need to write this section, make a new component or pop up
   addition=()=>{
     console.log('adding your friends')
   }

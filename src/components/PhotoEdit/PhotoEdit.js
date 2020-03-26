@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-
+//reuseable component for photo upload
 class PhotoEdit extends Component {
 
     state={
