@@ -10,6 +10,14 @@ body {
   text-align: center;
 }
 
+.fullView{
+  height: 510vh;
+  width: 100vw;
+  background-color: #34ADFF;
+  background-image: -webkit-linear-gradient(30deg, #34ADFF 80%, #4CBFFF 50%);
+
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
@@ -595,6 +603,10 @@ footer {
    .dude{
      margin-left: 2vw;
    }
+
+  
+
+
 
 
   }

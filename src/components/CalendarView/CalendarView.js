@@ -32,7 +32,7 @@ class CalendarView extends Component {
   render() {
     return (
       <>
-        <div className=''>
+        <div className='fullView'>
             <h1 className="center" >Upcoming Events</h1>
             {this.props.reduxState.event.calendarReducer && (
               <div className="calendarView">

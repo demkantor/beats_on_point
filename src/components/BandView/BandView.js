@@ -15,7 +15,7 @@ class BandView extends Component {
     const gig = this.props.reduxState.currentEvent.bandReducer;
     return (
       <>
-        <div className='bandView'>
+        <div className="fullView">
           <button className="log-in" onClick={()=>this.props.history.push('/calendar-view')}>Return To Calendar</button>
             <div className="bandView" key={gig.id}>
               <div className="bioBanner">{gig.name}</div>

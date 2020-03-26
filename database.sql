@@ -61,7 +61,8 @@ CREATE TABLE "bands_genres" (
 --create foreign keys
 ALTER TABLE "venues" ADD FOREIGN KEY ("user_name_id") REFERENCES "user" ("id");
 ALTER TABLE "bands" ADD FOREIGN KEY ("user_name_id") REFERENCES "user" ("id");
-ALTER TABLE "bands" ADD FOREIGN KEY ("genres_id") REFERENCES "genres" ("id");
+ALTER TABLE "bands_genres" ADD FOREIGN KEY ("bands_id") REFERENCES "bands" ("id");
+ALTER TABLE "bands_genres" ADD FOREIGN KEY ("genres_id") REFERENCES "genres" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("bands_id") REFERENCES "bands" ("id");
 ALTER TABLE "calendar" ADD FOREIGN KEY ("venues_id") REFERENCES "venues" ("id");
 
