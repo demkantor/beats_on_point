@@ -116,35 +116,33 @@ class BandEdit extends Component {
     return (
       <>
       <button className="log-in" onClick={()=>this.props.history.goBack()}>Back</button>
-        {this.props.reduxState &&
-        <h1>Welcome {this.props.reduxState.user.username}</h1>
-        }
-        <div className='profileEdit'>
-          <div className="profileViewEdit" key={gig.id}>
-              <div className="nameEdit">
-                <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
-                <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
-              </div>    
-              <div className="bioPhotoEdit">
-                <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
-                <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
-              </div>
-              <div className="bioDescriptionEdit">
-                {gig.description}
-                <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id, 'description')}/>
-              </div>
-              <div className="socialMediaEdit">
-                <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>
-                <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "twitter")}/>
-                <img className="linkIcon" src="/images/facebook.png" alt="facebook"/>
-                <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "facebook")}/>                        
-                <img className="linkIcon" src="/images/www.png" alt="website"/>
-                <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "www")}/>                        
-                <img className="linkIcon" src="/images/youtube.png" alt="youtube"/>
-                <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "youtube")}/>                   
-              </div>
+        <div className="profileViewEdit" key={gig.id}>
+          {this.props.reduxState &&
+            <h1 className="welcome" >Welcome {this.props.reduxState.user.username}</h1>
+          }
+            <div className="nameEdit">
+              <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
+              <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
+            </div>    
+            <div className="bioPhotoEdit">
+              <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+              <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
             </div>
-        </div>
+            <div className="bioDescriptionEdit">
+              {gig.description}
+              <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id, 'description')}/>
+            </div>
+            <div className="socialMediaEdit">
+              <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "twitter")}/>
+              <img className="linkIcon" src="/images/facebook.png" alt="facebook"/>
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "facebook")}/>                        
+              <img className="linkIcon" src="/images/www.png" alt="website"/>
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "www")}/>                        
+              <img className="linkIcon" src="/images/youtube.png" alt="youtube"/>
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "youtube")}/>                   
+            </div>
+          </div>
       </>
     )
   }

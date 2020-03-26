@@ -398,21 +398,51 @@ footer {
     grid-template-rows: repeat(24, 3vh);
   }
 
-  .nameEdit{
-    display: flex;
-    justify-self: end;
+  .welcome{
+    font-size: calc(18px + 1.4vw);
     grid-column-start: 2;
     grid-column-end: span 8;
     grid-row-start: 1;
+    grid-row-end: span 3;
+    
+  }
+
+  .nameEdit{
+    display: flex;
+    justify-self: end;
+    grid-column-start: 1;
+    grid-column-end: span 10;
+    grid-row-start: 4;
     grid-row-end: span 2;
+    margin-right: 2vw;
   }
 
   .bioPhotoEdit{
     display: flex;
     grid-column-start: 1;
     grid-column-end: span 9;
-    grid-row-start: 3;
+    grid-row-start: 6;
     grid-row-end: span 6;
+  }
+
+  .bioAddressEdit{
+    display: flex;
+    justify-self: end;
+    grid-column-start: 5;
+    grid-column-end: span 6;
+    grid-row-start: 10;
+    grid-row-end: span 2;
+    margin-right: 2vw;
+  }
+
+  .bioPhoneEdit{
+    display: flex;
+    justify-self: end;
+    grid-column-start: 7;
+    grid-column-end: span 4;
+    grid-row-start: 7;
+    grid-row-end: span 1;
+    margin-right: 2vw;
   }
 
   .bioDescriptionEdit{
@@ -421,7 +451,7 @@ footer {
     padding-right: 2vw;
     grid-column-start: 1;
     grid-column-end: span 10;
-    grid-row-start: 10;
+    grid-row-start: 13;
     grid-row-end: span 8;
     font-size: smaller;
   }
@@ -430,7 +460,7 @@ footer {
     display: flex;
     grid-column-start: 3;
     grid-column-end: span 6;
-    grid-row-start: 22;
+    grid-row-start: 23;
     grid-row-end: span 2;
   }
 

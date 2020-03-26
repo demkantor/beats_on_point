@@ -12,7 +12,7 @@ const UserPage = (props) => {
   //preloads band / venue info
   if(props.user.band === true){
     props.dispatch({type: 'GET_THIS_BAND', payload: props.user.id})
-  }else{
+  }else if(props.user.venue === true){
     props.dispatch({type: 'GET_THIS_VENUE', payload: props.user.id})
   }
   

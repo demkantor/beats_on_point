@@ -176,11 +176,11 @@ class VenueEdit extends Component {
     return (
       <>
       <button className="log-in" onClick={()=>this.props.history.goBack()}>Back</button>
-        {this.props.reduxState &&
-          <h1>Welcome {this.props.reduxState.user.username}</h1>
-        }
         <div className='profileEdit'>
           <div className="profileViewEdit" key={gig.id}>
+            {this.props.reduxState &&
+              <h1 className="welcome">Welcome {this.props.reduxState.user.username}</h1>
+             }
               <div className="nameEdit">
                   <p className="profileName" >Venue Name: <strong>{gig.name}</strong></p>
                   <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
