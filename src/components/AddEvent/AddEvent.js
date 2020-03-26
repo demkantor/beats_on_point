@@ -104,10 +104,10 @@ class AddEvent extends Component {
     return (
       <>
         <button className="log-in" onClick={this.editProfile}>edit profile</button>
-        <h1>Welcome {this.props.reduxState.user.username}</h1>
+        <h1 className="center">Welcome {this.props.reduxState.user.username}</h1>
         {this.props.reduxState.user.band === true &&
           <>
-            <h3>Your current events</h3>
+            <h3 className="left">Your current events</h3>
             {this.props.reduxState.event.personalCalendar
             ?
             this.props.reduxState.event.personalCalendar.map(event => (
@@ -119,13 +119,13 @@ class AddEvent extends Component {
               </div>
             ))
             :
-            <h6>Nothing on your calendat yet</h6>
+            <h6 className="center">Nothing on your calendat yet</h6>
             }
           </>
         }
         {this.props.reduxState.user.venue === true &&
           <>
-            <h3>Your current events</h3>
+            <h3 className="left">Your current events</h3>
             {this.props.reduxState.event.personalCalendar
             ?
             this.props.reduxState.event.personalCalendar.map(event => (
@@ -141,8 +141,8 @@ class AddEvent extends Component {
             }
           </>
           }
-          <h3>Add new event</h3>
-          <label htmlFor="pick-date" >Date</label>
+          <h3 className="left">Add new event</h3>
+          <label className="left" htmlFor="pick-date" >Date</label>
           <DatePicker
               name="pick-date"
               selected={this.state.date}
@@ -152,7 +152,7 @@ class AddEvent extends Component {
           />
           <br/>
           <div>
-            <label htmlFor="cost" >Cost</label>
+            <label className="left" htmlFor="cost" >Cost</label>
             <select name="cost" className="filter" onChange={this.filter} value={this.state.value}>
                 <option value="0">Free</option>
                 <option value="5.00">$5</option>
@@ -164,7 +164,7 @@ class AddEvent extends Component {
           </div>
           {this.props.reduxState.user.band === true &&
           <>
-            <label htmlFor="venue">Venue</label>
+            <label className="left" htmlFor="venue">Venue</label>
             <select name="venue" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectVenue}>
                 {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
                   return (
@@ -177,7 +177,7 @@ class AddEvent extends Component {
           }
           {this.props.reduxState.user.venue === true &&
           <>
-            <label htmlFor="band" >Band</label>
+            <label className="left" htmlFor="band" >Band</label>
             <select name="band" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectBand}>
             {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
               return (
@@ -189,14 +189,15 @@ class AddEvent extends Component {
           </>
           }
           <br/>
-          <button className="log-in" onClick={this.newEvent}>submit</button>
+          <button className="log-in left top" onClick={this.newEvent}>submit</button>
           <br/>
           {this.props.reduxState.user.band === true &&
-            <h5>Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+            <h5 className="left">Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
           }
           {this.props.reduxState.user.venue === true &&
-            <h5>Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+            <h5 className="left">Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
           }
+          <br/>
       </>
     )
   }

@@ -18,7 +18,7 @@ class VenueView extends Component {
 
     return (
       <>
-        <div className='venueView'>
+        <div className='bandView'>
         <button className="log-in" onClick={()=>this.props.history.push('/calendar-view')}>Return To Calendar</button>
           <div className="venueView" key={gig.id}>
             <div className="bioBanner">{gig.name}</div>

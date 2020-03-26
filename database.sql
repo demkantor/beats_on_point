@@ -5,7 +5,7 @@ CREATE DATABASE beats_on_point;
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
   "username" VARCHAR (80) UNIQUE NOT NULL,
-  "password" VARCHAR (1000) NOT NULL
+  "password" VARCHAR (1000) NOT NULL,
   "zip_code" varchar,
   "band" boolean DEFAULT false,
   "venue" boolean DEFAULT false,
@@ -17,7 +17,7 @@ CREATE TABLE "venues" (
   "name" varchar(120) DEFAULT 'add venue name',
   "user_name_id" int,
   "address" varchar(120) DEFAULT 'add address',
-  "phone" varchar(30) DEFAULT 'add phone number'
+  "phone" varchar(30) DEFAULT 'add phone number',
   "description" varchar DEFAULT 'add bio',
   "twitter" varchar DEFAULT 'add twitter link',
   "facebook" varchar DEFAULT 'add facebook link',
