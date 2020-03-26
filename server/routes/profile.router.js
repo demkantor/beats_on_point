@@ -36,48 +36,6 @@ router.get('/venue/:id', (req, res) => {
     });
 });
 
-//set logged-in band's description
-router.put('/description/:id', (req, res) => {
-    // console.log('in band profile edit description with id:', req.params.id, req.body.edit)
-    const queryText = `UPDATE ${req.body.who} SET "description"=$1 WHERE "id"=$2;`;
-    pool.query(queryText, [req.body.edit, Number(req.params.id)])
-    .then( (result) => {
-        res.send(result.rows);
-    })
-    .catch( (error) => {
-        console.log(`Error in profile edit description: ${error}`);
-        res.sendStatus(500);
-    });
-});
-
-//set social media link for logged-in band /venue 
-router.put('/SocialMedia/:id', (req, res) => {
-    // console.log('in social media edit with id:', req.params.id)
-    const queryText = `UPDATE ${req.body.who} SET ${req.body.type}=$1 WHERE "id"=$2;`;
-    pool.query(queryText, [req.body.edit, Number(req.params.id)])
-    .then( (result) => {
-        res.send(result.rows);
-    })
-    .catch( (error) => {
-        console.log(`Error in social media edit: ${error}`);
-        res.sendStatus(500);
-    });
-});
-
-//set name for logged-in band / venue 
-router.put('/name/:id', (req, res) => {
-    // console.log('in name edit with id:', req.params.id, req.body)
-    const queryText = `UPDATE ${req.body.who} SET ${req.body.type}=$1 WHERE "id"=$2;`;
-    pool.query(queryText, [req.body.edit, Number(req.params.id)])
-    .then( (result) => {
-        res.send(result.rows);
-    })
-    .catch( (error) => {
-        console.log(`Error in name edit: ${error}`);
-        res.sendStatus(500);
-    });
-});
-
 //set details for logged-in band / venue 
 router.put('/details/:id', (req, res) => {
     // console.log('in details edit with id:', req.params.id, req.body);
@@ -122,7 +80,7 @@ router.post('/new/venue/:id', (req, res) => {
     .then(() => { console.log('user id posted to venues table')
      })
     .catch((err) => {
-      console.log('Error completing new band POST', err);
+      console.log('Error completing new venue POST', err);
       res.sendStatus(500);
     }).then(()=>{
         const query = `UPDATE "user" SET "venue"=true WHERE "id"=($1);`;

@@ -14,7 +14,7 @@ class BandEdit extends Component {
       this.props.dispatch({type: 'GET_THIS_BAND', payload: user.id});
   }
     
-  descriptionEdit=(bandId)=>{
+  descriptionEdit=(bandId, type)=>{
     const user = this.props.reduxState.user;
       swal("New Bio Here....", {
         content: "input",
@@ -35,7 +35,7 @@ class BandEdit extends Component {
           swal("You new bio has been saved!", {
             icon: "success",
           });
-        this.props.dispatch({type: 'EDIT_DESCRIPTION', payload:{edit: value, id: bandId, who: 'bands', userId: user.id}})
+          this.props.dispatch({type: 'EDIT_DETAILS', payload:{edit: value, type: type, id: bandId, who: 'bands', userId: user.id}})
         } else {
           swal("Not touching your bio!");
         }
@@ -64,7 +64,7 @@ class BandEdit extends Component {
           swal("You name has been saved!", {
             icon: "success",
           });
-        this.props.dispatch({type: 'EDIT_NAME', payload:{edit: value, type: type, id: bandId, who: 'bands', userId: user.id}})
+        this.props.dispatch({type: 'EDIT_DETAILS', payload:{edit: value, type: type, id: bandId, who: 'bands', userId: user.id}})
         } else {
           swal("Not touching your name!");
         }
@@ -77,10 +77,11 @@ class BandEdit extends Component {
     this.props.history.push('/photo-edit');
   }
 
-  socialMedia=(bandId, type)=>{
+  socialMedia=(bandId, type, link)=>{
     const user = this.props.reduxState.user;
       // console.log(`in social media, ${bandId}, ${type}`);
     Swal.fire({
+      title: `Current: ${link}`,
       input: 'url',
       inputPlaceholder: `Enter ${type} URL`
     }).then((url)=>{
@@ -105,7 +106,7 @@ class BandEdit extends Component {
             `Your ${type} link has been updated!`,
             'success'
           )
-          this.props.dispatch({type: 'EDIT_SOCIAL_MEDIA', payload:{edit: url.value, id: bandId, type: type, who: "bands", userId: user.id}})
+          this.props.dispatch({type: 'EDIT_DETAILS', payload:{edit: url.value, id: bandId, type: type, who: "bands", userId: user.id}})
         }
       })
     })
@@ -134,13 +135,13 @@ class BandEdit extends Component {
             </div>
             <div className="socialMediaEdit">
               <img className="linkIcon" src="/images/twitter.png" alt="twitter"/>
-              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "twitter")}/>
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "twitter", gig.twitter)}/>
               <img className="linkIcon" src="/images/facebook.png" alt="facebook"/>
-              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "facebook")}/>                        
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "facebook", gig.facebook)}/>                        
               <img className="linkIcon" src="/images/www.png" alt="website"/>
-              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "www")}/>                        
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "www", gig.www)}/>                        
               <img className="linkIcon" src="/images/youtube.png" alt="youtube"/>
-              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "youtube")}/>                   
+              <img className="editLinkIcon" src="/images/pencil.png" alt="edit" onClick={()=>this.socialMedia(gig.id, "youtube", gig.youtube)}/>                   
             </div>
           </div>
       </>
