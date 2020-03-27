@@ -4,7 +4,7 @@ const router = express.Router();
 
 //get all genres
 router.get('/', (req, res) => {
-    console.log('in genre GET all')
+    // console.log('in genre GET all')
     const queryText = `SELECT * FROM "genres";`;
     pool.query(queryText)
     .then( (result) => {
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 //get this bands genre
 router.get('/:id', (req, res) => {
-    console.log('in GET this bands genre')
+    // console.log('in GET this bands genre')
     const queryText = `SELECT "genre", "genres"."id" FROM "bands"
     JOIN "bands_genres" ON "bands_id" = "bands"."id" 
     JOIN "genres"  ON "bands_genres"."genres_id" = "genres"."id"
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
 
 //get this bands genre for edit
 router.get('/edit/:id', (req, res) => {
-    console.log('in GET this bands genre for edit')
+    // console.log('in GET this bands genre for edit')
     const queryText = `SELECT "genre", "genres"."id" FROM "bands"
     JOIN "bands_genres" ON "bands_id" = "bands"."id" 
     JOIN "genres"  ON "bands_genres"."genres_id" = "genres"."id"
@@ -46,6 +46,20 @@ router.get('/edit/:id', (req, res) => {
     })
     .catch( (error) => {
         console.log(`Error in edit genre GET this${error}`);
+        res.sendStatus(500);
+    });
+});
+
+//set new genre for band 
+router.post('/edit/new/:id', (req, res) => {
+    // console.log('in add genre to band with:', req.body);
+    const queryText = `INSERT INTO "bands_genres" ("bands_id", "genres_id") VALUES ($1, $2);`;
+    pool.query(queryText, [Number(req.body.id), Number(req.body.edit)])
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in genre to band POST: ${error}`);
         res.sendStatus(500);
     });
 });

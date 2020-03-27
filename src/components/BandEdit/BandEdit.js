@@ -80,8 +80,41 @@ class BandEdit extends Component {
     this.props.history.push('/photo-edit');
   }
 
-  genreEdit=()=>{
-    console.log('hey')
+  genreEdit=(bandId)=>{
+    const user = this.props.reduxState.user;
+    let options = {}
+    this.props.reduxState.genreReducer.allGenres.map(band => {
+      return options[band.id] = band.genre
+      })
+    console.log('hey', options);
+    Swal.fire({
+      title: 'Select field validation',
+      input: 'select',
+      inputOptions: options,
+      inputPlaceholder: 'Select Genre',
+      showCancelButton: true
+      }).then((genre)=>{
+        console.log(genre)
+        if(genre){
+          Swal.fire({
+            title: `You selected ${genre.value}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "Add it!"
+            }).then((result) => {
+                if (result.value) {
+                  Swal.fire(
+                    'saved!',
+                    `New genre added!`,
+                    'success'
+                  )
+          this.props.dispatch({type: 'ADD_MY_GENRE', payload:{edit: genre.value, id: bandId, userId: user.id}})
+                }
+            })
+         }
+      })
   }
 
   socialMedia=(bandId, type, link)=>{
@@ -145,7 +178,7 @@ class BandEdit extends Component {
                         <strong>{band.genre}</strong>
                       </div>
                     ))}
-                     <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.genreEdit}/>
+                     <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.genreEdit(gig.id)}/>
                   </div>
                 )}
             <div className="bioDescriptionEdit">
