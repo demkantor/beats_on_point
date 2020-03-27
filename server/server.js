@@ -15,6 +15,7 @@ const photoRouter = require('./routes/photo.router');
 const calendarRouter = require('./routes/calendar.router');
 const bandVenueRouter = require('./routes/bandVenue.router');
 const profileRouter = require('./routes/profile.router');
+const genreRouter = require('./routes/genre.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +35,7 @@ app.use('/api/photo', photoRouter);
 app.use('/api/calendar', calendarRouter);
 app.use('/api/event', bandVenueRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/genre', genreRouter);
 
 // Serve static files
 app.use(express.static('build'));

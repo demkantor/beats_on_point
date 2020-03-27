@@ -237,6 +237,7 @@ input {
     width:95vw;
     margin-top: 5vw;
     margin-left: 2.5vw;
+    border-radius: 10px;
   }
 
   .lostLink, .lostLinkBack{
@@ -357,6 +358,15 @@ input {
     margin-top: 0;
   }
 
+  .addition{
+    max-width: 84vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    display: flex;
+    flex-direction: column;
+    line-height: 3vh;
+  }
+
   .eventInfo{
     line-height: 2em;
     min-width: 40vw;
@@ -402,6 +412,18 @@ input {
     text-align: center;
   }
 
+  .genre{
+    display: flex;
+    text-align: center;
+    color: #e4edfa;
+    justify-content: center;
+  }
+
+  .space{
+    margin-left: 1vw;
+    padding-left: 1vw;
+  }
+
   .socialMedia{
     width: 100vw;
     position: fixed;
@@ -433,7 +455,6 @@ input {
     grid-column-end: span 8;
     grid-row-start: 1;
     grid-row-end: span 3;
-    
   }
 
   .nameEdit{
@@ -452,6 +473,16 @@ input {
     grid-column-end: span 9;
     grid-row-start: 6;
     grid-row-end: span 6;
+  }
+
+  .genreEdit{
+    margin-right: 2vw;
+    display: flex;
+    justify-self: end;
+    grid-column-start: 5;
+    grid-column-end: span 6;
+    grid-row-start: 8;
+    grid-row-end: span 2;
   }
 
   .bioAddressEdit{
@@ -649,6 +680,11 @@ input {
     right: 2vw;
   }
 
+  .foot{
+    display: block;
+    padding-left: 5vw;
+  }
+
   footer{
     margin: .01vh;
     position: fixed;
@@ -656,6 +692,24 @@ input {
     height: 1.5vh;
     width: 100vw;
     background-color: #393486;
+  }
+
+  .socialMedia{
+    width: 100vw;
+    position: fixed;
+    bottom: 4vh;
+    text-align: center;
+    height: 10vh;
+  }
+
+  .bioPhotoEdit{
+    width: 300px;
+  }
+
+  .socialMediaEdit{
+    position: absolute;
+    margin-left: 25vw;
+    bottom: 6vh;
   }
 
   }

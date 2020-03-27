@@ -111,7 +111,7 @@ class AddEvent extends Component {
             {this.props.reduxState.event.personalCalendar
             ?
             this.props.reduxState.event.personalCalendar.map(event => (
-              <div className="poster" key={event.id}>
+              <div className="poster addition" key={event.id}>
                 <div>{event.venue_name}</div>
                 <div>{event.date}</div>
                 <div>Tickets {event.cost}</div>
@@ -129,7 +129,7 @@ class AddEvent extends Component {
             {this.props.reduxState.event.personalCalendar
             ?
             this.props.reduxState.event.personalCalendar.map(event => (
-              <div className="poster" key={event.id}>
+              <div className="poster addition" key={event.id}>
                 <div>{event.band_name}</div>
                 <div>{event.date}</div>
                 <div>Tickets {event.cost}</div>

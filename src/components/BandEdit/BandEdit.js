@@ -10,8 +10,11 @@ class BandEdit extends Component {
 
   componentDidMount=()=>{
       const user = this.props.reduxState.user;
+      const band =this.props.reduxState.editProfile.editBandReducer;
       console.log(user.username);
       this.props.dispatch({type: 'GET_THIS_BAND', payload: user.id});
+      this.props.dispatch({type: 'GET_EDIT_GENRE', payload: band.id});
+      this.props.dispatch({type: 'GET_ALL_GENRES'})
   }
     
   descriptionEdit=(bandId, type)=>{
@@ -77,6 +80,10 @@ class BandEdit extends Component {
     this.props.history.push('/photo-edit');
   }
 
+  genreEdit=()=>{
+    console.log('hey')
+  }
+
   socialMedia=(bandId, type, link)=>{
     const user = this.props.reduxState.user;
       // console.log(`in social media, ${bandId}, ${type}`);
@@ -129,6 +136,18 @@ class BandEdit extends Component {
               <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
               <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
             </div>
+            {this.props.reduxState.genreReducer.bandEditGenre && (
+                  <div className="genreEdit">
+                    
+                    <div>Genre:</div>
+                    {this.props.reduxState.genreReducer.bandEditGenre.map(band => (
+                      <div className="space" key={band.id}>
+                        <strong>{band.genre}</strong>
+                      </div>
+                    ))}
+                     <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.genreEdit}/>
+                  </div>
+                )}
             <div className="bioDescriptionEdit">
               {gig.description}
               <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.descriptionEdit(gig.id, 'description')}/>

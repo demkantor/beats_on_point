@@ -7,6 +7,7 @@ import photoReducer from './photoReducer';
 import event from './calendarReducer';
 import currentEvent from './bandVenueReducer';
 import editProfile from './profileEditReducer';
+import genreReducer from './genreReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   event,
   currentEvent,
   editProfile,
+  genreReducer
 });
 
 export default rootReducer;

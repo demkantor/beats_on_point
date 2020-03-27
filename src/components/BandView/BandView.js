@@ -9,6 +9,7 @@ class BandView extends Component {
   componentDidMount=()=>{
     let id = this.props.history.location.payload;
       this.props.dispatch({type: 'GET_THE_BAND', payload: id});
+      this.props.dispatch({type: 'GET_THIS_GENRE', payload: id});
   }
 
   render() {
@@ -24,6 +25,16 @@ class BandView extends Component {
               <div className="bioDescription">
                 {gig.description}
               </div>
+                {this.props.reduxState.genreReducer.bandGenre && (
+                  <div className="genre">
+                    <div>Genre:</div>
+                    {this.props.reduxState.genreReducer.bandGenre.map(band => (
+                      <div className="space" key={band.id}>
+                        {band.genre}
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="socialMedia">
                   <a href={gig.twitter} target="_blank" rel="noreferrer noopener">
                     <img className="linkIcons" src="/images/twitter.png" alt={gig.twitter}/>
