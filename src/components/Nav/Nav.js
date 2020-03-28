@@ -52,6 +52,14 @@ const Nav = (props) => (
           />
         </>
       )}
+        {/* if logged in user is an admin */}
+        {props.user.admin === true && (
+        <>
+          <Link className="nav-link" to="/admin">
+            Admin
+          </Link>
+        </>
+      )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/calendar-view">
         Calendar

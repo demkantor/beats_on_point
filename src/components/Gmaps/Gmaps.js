@@ -1,60 +1,45 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper} from 'google-maps-react';
-require('dotenv').config();
+import GoogleMapReact from 'google-map-react';
 
 
-
-const mapStyles = {
-  width: '90vw',
-  height: '40vh',
-  margin: '5vw'
-};
 
 
 
 export class Gmaps extends Component {
 
-  state = {
-    showingInfoWindow: false,  //Hides or the shows the infoWindow
-    activeMarker: {},          //Shows the active marker upon click
-    selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
-  };
+  
 
-  onMarkerClick = (props, marker, e) =>{
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-  }
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
+  static defaultProps = {
+    center: {
+      lat: 44.9781162,
+      lng: -93.2634743
+    },
+    zoom: 14
   };
+  
+  
 
   render() {
     return (
         <>
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={mapStyles}
-            initialCenter={{
-            lat: 44.9781162,
-            lng: -93.2634743
-            }}
-          />
+         <div className="mapContainer">
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+              defaultCenter={this.props.center}
+              defaultZoom={this.props.zoom}
+            >
+              {/* <Marker
+                lat={44.9781162}
+                lng={-93.2634743}
+                text="venue"
+               /> */}
+           </GoogleMapReact>
+      </div>
         </>
     );
   }
 }
 
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY
-})(Gmaps);
+
+export default Gmaps;

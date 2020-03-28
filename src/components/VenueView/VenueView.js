@@ -27,6 +27,9 @@ class VenueView extends Component {
             <div className="bioAddress">
               {gig.address}
             </div>
+            <div className="bioAddress">
+              {gig.phone}
+            </div>
             <div className="bioDescription">
               {gig.description}
             </div>

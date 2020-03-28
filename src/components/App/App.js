@@ -18,7 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import PhotoEdit from '../PhotoEdit/PhotoEdit';
 import SignInSuccess from '../SignInSuccess/SignInSuccess';
-
+import Admin from '../Admin/Admin';
 import BandEdit from '../BandEdit/BandEdit';
 import VenueEdit from '../VenueEdit/VenueEdit';
 import AddEvent from '../AddEvent/AddEvent';
@@ -56,6 +56,7 @@ class App extends Component {
               <ProtectedRoute exact path="/band-edit" component={BandEdit}/>
               <ProtectedRoute exact path="/venue-edit" component={VenueEdit}/>
               <ProtectedRoute exact path="/photo-edit" component={PhotoEdit}/>
+              <ProtectedRoute exact path="/admin" component={Admin}/>
               {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/home will show the UserPage if the user is logged in.
               If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

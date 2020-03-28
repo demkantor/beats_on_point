@@ -95,6 +95,7 @@ input {
 
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #4b4597;
+  transition: all 0.3s;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -112,6 +113,7 @@ input {
 
 .link-button:hover{
     transform: scale(1.1);
+    transition: all 0.3s;
 }
 
 .nav-title {
@@ -176,6 +178,7 @@ input {
 
 .moreDude:hover{
   background-color: #4b4597;
+  transition: all 0.3s;
 }
 
 #filter{
@@ -263,6 +266,7 @@ input {
   .lostLink:hover, .lostLink:focus, .lostLink:active {
     -webkit-transform: skew(-10deg);
     transform: skew(-10deg);
+    transition: all 0.3s;
   }
 
   .lostLinkBack:hover, .lostLinkBack:focus, .lostLinkBack:active {
@@ -377,6 +381,7 @@ input {
 
   .inlinePhoto:hover, .inlinePhoto:focus, .inlinePhoto:active{
     transform: scale(1.1);
+    transition: all 0.3s;
   }
 
   .bandView{
@@ -581,9 +586,53 @@ input {
   }
 
   .mapContainer{
+    display: flex;
+    margin: auto;
     height: 30vh;
     width: 90vw;
   }
+
+  table {
+    width: 100vw;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  
+  th, td {
+    padding: 2vw;
+    background-color: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  
+  th {
+    text-align: left;
+  }
+  
+  thead th{
+    background-color: #4b4597;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(255,255,255,0.3);
+  }
+
+  tbody td:hover {
+      position: relative;
+      background-color: rgba(255,255,255,0.2);
+  }
+
+  td button{
+    width: 100%;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.2);
+  }
+    
+  td button:hover{
+    background-color: #4b4597;
+    color: #fff;
+  }
+  
 
 @media all and (min-width: 500px) {
    

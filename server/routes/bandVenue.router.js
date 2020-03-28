@@ -20,7 +20,7 @@ router.get('/band/:id', (req, res) => {
 //get current venue request
 router.get('/venue/:id', (req, res) => {
     // console.log('in venue GET with id:', req.params.id)
-    const queryText = `SELECT "id", "name", "description", "address", "twitter", "facebook", "www", "youtube", 
+    const queryText = `SELECT "id", "name", "description", "address", "twitter", "facebook", "www", "youtube", "phone", 
     ENCODE(venue_photo, 'base64') as photo FROM "venues" WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
     .then( (result) => {
