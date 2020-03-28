@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../App/App.css';
-
+import swal from 'sweetalert'
 
 //reuseable component for photo upload
 class PhotoEdit extends Component {
@@ -12,8 +12,13 @@ class PhotoEdit extends Component {
         image: null
     }
 
+
+    addClick=()=>{
+        this.refs.fileUploader.click();
+    }
+    
     componentDidMount=()=>{
-        // this.props.dispatch({type: 'GET_YOUR_PICTURE', payload: this.props.reduxState.user.id});
+        this.props.dispatch({type: 'GET_YOUR_PICTURE', payload: this.props.reduxState.user.id});
     }
 
     handleChange=(event)=>{
@@ -31,11 +36,14 @@ class PhotoEdit extends Component {
         formData.append('file', this.state.file);
         const image = ({pic: formData, user: this.props.reduxState.user});
         this.props.dispatch({type: 'WANT_YOUR_PICTURE', payload: image});
+        swal({
+            icon: "success",
+            button: false,
+            timer: 1500,
+            text: 'success!'
+          });
     }
 
-    cheapClick=()=>{
-        this.refs.fileUploader.click();
-    }
 
   render() {
     return (
@@ -45,7 +53,7 @@ class PhotoEdit extends Component {
             <form  className="photoForm" onSubmit={this.submit}>
                  <div className="photoInput">
                     <input type="file" ref="fileUploader" onChange={this.handleChange} />
-                    <label htmlFor="file" className="photoUpload" onClick={this.cheapClick}>Choose</label>
+                    <label htmlFor="file" className="photoUpload" onClick={this.addClick}>Choose</label>
                  </div>
                 <div>
                     {this.state.file 

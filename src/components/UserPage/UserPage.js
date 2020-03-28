@@ -24,9 +24,11 @@ const UserPage = (props) => {
           </h1>
           <img className="bioPhoto" src={`data:image/png;base64,${props.user.photo}`} alt="profile" />
           {/* <p className="welcomeId" >Your ID is: {props.user.id}</p> */}
-          ''
           <LogOutButton className="log-in btnFix" />
+          {props.user.id !== ''
+          ?
           <SignInSuccess /> 
+          : null}
         </div>
       </>
     );

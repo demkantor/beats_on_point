@@ -22,9 +22,11 @@ class AddEvent extends Component {
     who: null
   }
 
-  //need to write this section, make a new component or pop up
   addition=()=>{
-    console.log('adding your friends')
+    swal({
+      icon: "success",
+      title: "A message has been sent to an admin with your request"
+    });
   }
 
   componentDidMount=()=>{
@@ -192,10 +194,10 @@ class AddEvent extends Component {
           <button className="log-in left top" onClick={this.newEvent}>submit</button>
           <br/>
           {this.props.reduxState.user.band === true &&
-            <h5 className="left">Don't see the venue you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+            <h5 className="left">Don't see the venue you want? <button className="log-in" onClick={()=>this.addition('venue')}>create</button></h5>
           }
           {this.props.reduxState.user.venue === true &&
-            <h5 className="left">Don't see the band you want? <button className="log-in" onClick={this.addition}>create</button></h5>
+            <h5 className="left">Don't see the band you want? <button className="log-in" onClick={()=>this.addition('band')}>create</button></h5>
           }
           <br/>
       </>

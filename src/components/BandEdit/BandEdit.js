@@ -75,11 +75,6 @@ class BandEdit extends Component {
     })
   }
 
-  photoEdit=()=>{
-    // console.log('takin pictures');
-    this.props.history.push('/photo-edit');
-  }
-
   genreEdit=(bandId)=>{
     const user = this.props.reduxState.user;
     let options = {}
@@ -115,6 +110,11 @@ class BandEdit extends Component {
             })
          }
       })
+  }
+
+  photoEdit=()=>{
+    // console.log('takin pictures');
+    this.props.history.push('/photo-edit');
   }
 
   socialMedia=(bandId, type, link)=>{

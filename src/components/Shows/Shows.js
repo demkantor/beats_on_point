@@ -23,8 +23,6 @@ class Shows extends Component {
                 <option value="genre">filter by genre</option>
                 <option value="location">filter by location</option>
             </select>
-          <h1>"Yeah well, that's just, ya know, like, your opinion, man."</h1>
-          <p>"The Dude"</p>
           </div>
       </>
     )

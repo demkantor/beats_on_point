@@ -30,7 +30,6 @@ class CalendarView extends Component {
   }
 
   render() {
-    console.log(process.env)
     return (
       <>
         <div className='fullView'>

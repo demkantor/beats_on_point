@@ -16,7 +16,7 @@ state={
   }
 
   handleChange=(zip, event)=>{
-    this.setState({zip: event.target.value});
+    this.setState({[zip]: event.target.value});
   }
 
   render() {
