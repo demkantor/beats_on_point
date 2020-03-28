@@ -5,6 +5,7 @@ import {takeEvery, put} from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* calendarSaga() {
     yield takeEvery('GET_EVENT_LIST', getEventList);
+    yield takeEvery('GET_NEW_LIST', getNewList);
     yield takeEvery('GET_MY_CALENDAR', getMyCalendar);
     yield takeEvery('REMOVE_EVENT', removeEvent);
     yield takeEvery('CREATE_NEW_EVENT', createNewEvent);
@@ -15,6 +16,13 @@ function* getEventList(){
     // console.log("We are here in calendar event GET");
     const eventList = yield axios.get('/api/calendar');
     console.log('in saga - calendar event GET back with:', eventList.data);
+    yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
+}
+
+function* getNewList(list){
+    console.log("We are here in NEW calendar event GET", list.payload);
+    const eventList = yield axios.get(`/api/calendar/new/${list.payload.type}/${list.payload.query}`);
+    console.log('in saga - NEW calendar event GET back with:', eventList.data);
     yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
 }
 

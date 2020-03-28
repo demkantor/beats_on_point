@@ -21,8 +21,8 @@ class VenueView extends Component {
         <div className='bandView'>
         <button className="log-in" onClick={()=>this.props.history.push('/calendar-view')}>Return To Calendar</button>
           <div className="venueView" key={gig.id}>
-            <div className="bioBanner">{gig.name}</div>
-            <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+            <div className="bioBanner">{gig.venuename}</div>
+            <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.venuename}/>
             <br />
             <div className="bioAddress">
               {gig.address}

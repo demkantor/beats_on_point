@@ -7,23 +7,64 @@ import '../App/App.css';
 class Shows extends Component {
 
     state={
-        value: "date"
+      show: false,
+      query: '',
+      type: "genre"
     }
 
     filter=(event)=>{
-        this.setState({value: event.target.value});
+        this.setState({type: event.target.value});
+    }
+
+    handleInputChange = () => {
+      this.setState({
+        query: this.search.value
+      })
+    }
+
+    submit=(event)=>{
+      event.preventDefault();
+      console.log(this.state);
+      this.props.dispatch({type: 'GET_NEW_LIST', payload: this.state})
+    }
+
+    toggle=()=>{
+      if(this.state.show === false){
+        this.setState({show: true})
+      }else{
+        this.setState({show: false})
+      }
     }
 
   render() {
     return (
       <>
-        <div className='zip'>
-            <select id="filter" onChange={this.filter} value={this.state.value}>
-                <option value="date">filter by date</option>
-                <option value="genre">filter by genre</option>
-                <option value="location">filter by location</option>
-            </select>
+      {this.state.show === false &&
+      <button className="log-in" onClick={this.toggle}>Search</button>
+      }
+      {this.state.show === true &&
+        <>
+          <button className="log-in" onClick={this.toggle}>hide</button>
+          <div className='filter'>
+              <select className='filterList' onChange={this.filter} value={this.state.value}>
+                  <option value="genre">filter by genre</option>
+                  <option value="bandname">filter by band</option>
+                  <option value="venuename" >filter by venue</option>
+              </select>
+            <form className="search" onSubmit={(event)=>this.submit(event)}>
+              <input
+                size="15"
+                className="serachInputt"
+                placeholder="Search for..."
+                ref={input => this.search = input}
+                onChange={this.handleInputChange}
+              />
+              <p>{this.state.query}</p>
+              <input type='submit' className='log-in reverse'/>
+            </form>
           </div>
+        </>
+      }
       </>
     )
   }

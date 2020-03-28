@@ -19,8 +19,8 @@ class BandView extends Component {
         <div className="fullView">
           <button className="log-in" onClick={()=>this.props.history.push('/calendar-view')}>Return To Calendar</button>
             <div className="bandView" key={gig.id}>
-              <div className="bioBanner">{gig.name}</div>
-              <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+              <div className="bioBanner">{gig.bandname}</div>
+              <img className="bioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.bandname}/>
               <br />
               <div className="bioDescription">
                 {gig.description}

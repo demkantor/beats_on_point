@@ -162,11 +162,11 @@ class BandEdit extends Component {
             <h1 className="welcome" >Welcome {this.props.reduxState.user.username}</h1>
           }
             <div className="nameEdit">
-              <p className="profileName" >Band Name: <strong>{gig.name}</strong></p>
-              <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
+              <p className="profileName" >Band Name: <strong>{gig.bandname}</strong></p>
+              <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'bandname', gig.bandname)}/>
             </div>    
             <div className="bioPhotoEdit">
-              <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+              <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.bandname}/>
               <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
             </div>
             {this.props.reduxState.genreReducer.bandEditGenre && (

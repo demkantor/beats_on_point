@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../App/App.css';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import Shows from '../Shows/Shows';
 
 
 //displays full calendar event list
@@ -32,6 +33,7 @@ class CalendarView extends Component {
   render() {
     return (
       <>
+      <Shows/>
         <div className='fullView'>
             <h1 className="center" >Upcoming Events</h1>
             {this.props.reduxState.event.calendarReducer && (

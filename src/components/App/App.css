@@ -92,9 +92,17 @@ input {
     transition: all 0.3s;
   }
 
-
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #4b4597;
+  transition: all 0.3s;
+}
+
+.reverse{
+  background-color: #4b4597;
+}
+
+.reverse:hover{
+  background-color: #393486;
   transition: all 0.3s;
 }
 
@@ -181,7 +189,7 @@ input {
   transition: all 0.3s;
 }
 
-#filter{
+.filterList{
   cursor: pointer;
   font-size: large;
   float: right;
@@ -190,6 +198,7 @@ input {
   color: #f8f8f8;
   min-height: 23px;
   min-width: 100px;
+  margin: 1vw;
 }
 
 .filter{

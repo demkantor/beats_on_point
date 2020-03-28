@@ -14,7 +14,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "venues" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(120) DEFAULT 'add venue name',
+  "bandname" varchar(120) DEFAULT 'add venue name',
   "user_name_id" int,
   "address" varchar(120) DEFAULT 'add address',
   "phone" varchar(30) DEFAULT 'add phone number',
@@ -28,7 +28,7 @@ CREATE TABLE "venues" (
 
 CREATE TABLE "bands" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(100) DEFAULT 'add band name',
+  "venuename" varchar(100) DEFAULT 'add band name',
   "user_name_id" int,
   "description" varchar DEFAULT 'add bio',
   "twitter" varchar DEFAULT 'add twitter link',

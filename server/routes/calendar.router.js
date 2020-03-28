@@ -24,6 +24,33 @@ router.get('/', (req, res) => {
     });
 });
 
+//get filtered event list
+router.get('/new/:type/:query', (req, res) => {
+    console.log('in NEW calendar GET', req.params.type, req.params.query);
+    let query = req.params.query;
+    let column = req.params.type;
+    const queryText = `SELECT "calendar"."id", "calendar"."bands_id", "venues_id", "cost",
+    TO_CHAR("date", 'YY-MM-DD HH12:MI') as "order_date",
+    TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date",  
+    ENCODE("bands"."band_photo", 'base64') as "band_photo",
+    ENCODE("venues"."venue_photo", 'base64') as "venue_photo"
+    FROM "calendar" 
+    JOIN "bands" ON "bands"."id" = "calendar"."bands_id"
+    JOIN "venues" ON "venues"."id" = "calendar"."venues_id"
+    JOIN "bands_genres" on "bands_genres"."bands_id" = "bands"."id"
+    JOIN "genres" on "genres"."id" = "bands_genres"."genres_id"
+    WHERE ${column} = '${query}'
+    ORDER BY "order_date" ASC;`;
+    pool.query(queryText)
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in NEW calendar GET ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 //get personal calendar events
 router.get('/personal/:who/:id', (req, res) => {
     // console.log('in personal calendar GET', req.params.who, req.params.id);
@@ -32,8 +59,8 @@ router.get('/personal/:who/:id', (req, res) => {
     TO_CHAR("date", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as "date", 
     ENCODE("bands"."band_photo", 'base64') as "band_photo",
     ENCODE("venues"."venue_photo", 'base64') as "venue_photo",
-    "bands"."name" as band_name,
-    "venues"."name" as venue_name
+    "bands"."bandname" as band_name,
+    "venues"."venuename" as venue_name
     FROM "calendar" 
     JOIN "bands" ON "bands"."id" = "calendar"."bands_id"
     JOIN "venues" ON "venues"."id" = "calendar"."venues_id"

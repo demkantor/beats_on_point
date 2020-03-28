@@ -182,11 +182,11 @@ class VenueEdit extends Component {
               <h1 className="welcome">Welcome {this.props.reduxState.user.username}</h1>
              }
               <div className="nameEdit">
-                  <p className="profileName" >Venue Name: <strong>{gig.name}</strong></p>
-                  <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'name', gig.name)}/>
+                  <p className="profileName" >Venue Name: <strong>{gig.venuename}</strong></p>
+                  <img className="editButton" src='./images/edit.png' alt="edit" onClick={()=>this.nameEdit(gig.id, 'venuename', gig.venuename)}/>
               </div>    
               <div className="bioPhotoEdit">
-                  <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.name}/>
+                  <img className="editBioPhoto" src={`data:image/png;base64,${gig.photo}`} alt={gig.venuename}/>
                   <img className="editButton" src='./images/edit.png' alt="edit" onClick={this.photoEdit}/>
               </div>
               <div className="bioAddressEdit">

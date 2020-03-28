@@ -36,14 +36,14 @@ class AddEvent extends Component {
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'bands'}})
         this.props.dispatch({type: 'GET_ALL_VENUES'})
         this.props.dispatch({type: 'GET_THIS_BAND', payload: this.props.reduxState.user.id})
-        this.setState({bands: this.props.reduxState.editProfile.editBandReducer.name})
+        this.setState({bands: this.props.reduxState.editProfile.editBandReducer.bandname})
         this.setState({bandsId: this.props.reduxState.editProfile.editBandReducer.id})
         this.setState({who: 'bands'})
     }else{
         this.props.dispatch({type: 'GET_MY_CALENDAR', payload: {id: user.id, who: 'venues'}})
         this.props.dispatch({type: 'GET_ALL_BANDS'});
         this.props.dispatch({type: 'GET_THIS_VENUE', payload: this.props.reduxState.user.id})
-        this.setState({venues: this.props.reduxState.editProfile.editVenueReducer.name})
+        this.setState({venues: this.props.reduxState.editProfile.editVenueReducer.venuename})
         this.setState({venuesId: this.props.reduxState.editProfile.editVenueReducer.id})
         this.setState({who: 'venues'})
       }
@@ -170,8 +170,8 @@ class AddEvent extends Component {
             <select name="venue" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectVenue}>
                 {this.props.reduxState.currentEvent.allVenues.map(dropdown => { 
                   return (
-                    <option onClick={()=>this.setState({venues: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
-                    {dropdown.name}</option>
+                    <option onClick={()=>this.setState({venues: dropdown.venuename})} key={dropdown.id} value={dropdown.id} ref={dropdown.venuename}>
+                    {dropdown.venuename}</option>
                   )})
                 }
             </select>
@@ -183,8 +183,8 @@ class AddEvent extends Component {
             <select name="band" className="filter" ref={this.state.value} value={this.state.value} onChange={this.selectBand}>
             {this.props.reduxState.currentEvent.allBands.map(dropdown => { 
               return (
-              <option onClick={()=>this.setState({bands: dropdown.name})} key={dropdown.id} value={dropdown.id} ref={dropdown.name}>
-              {dropdown.name}</option>
+              <option onClick={()=>this.setState({bands: dropdown.bandname})} key={dropdown.id} value={dropdown.id} ref={dropdown.bandname}>
+              {dropdown.bandname}</option>
             )})
             }
             </select>
