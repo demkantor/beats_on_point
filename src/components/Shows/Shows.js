@@ -8,7 +8,7 @@ class Shows extends Component {
 
     state={
       show: false,
-      query: '',
+      query: [],
       type: "genre"
     }
 
@@ -35,11 +35,30 @@ class Shows extends Component {
           return genre.genre
         })
         if (value.length > 0) {
-        let filteredList = list.filter(genre => genre.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+          let filteredList = list.filter(genre => genre.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+          this.setState({query: filteredList})
+        }
+      }
+      else if(this.state.type === 'bandname'){
+        const list = this.props.reduxState.currentEvent.allBands.map(band=>{
+          return band.bandname
+        })
+        if (value.length > 0) {
+          let filteredList = list.filter(genre => genre.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+          this.setState({query: filteredList})
+        }
+      }
+      else if(this.state.type === 'venuename'){
+        const list = this.props.reduxState.currentEvent.allVenues.map(venue=>{
+          return venue.venuename
+        })
+        if (value.length > 0) {
+          let filteredList = list.filter(genre => genre.toLowerCase().indexOf(value.toLowerCase()) !== -1);
           this.setState({query: filteredList})
         }
       }
     }
+
 
     refresh=()=>{
       this.props.dispatch({type: 'GET_EVENT_LIST'});
@@ -57,6 +76,8 @@ class Shows extends Component {
       }else{
         this.setState({show: false})
       }
+      this.props.dispatch({type: 'GET_ALL_BANDS'})
+      this.props.dispatch({type: 'GET_ALL_VENUES'})
     }
 
   render() {
