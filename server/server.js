@@ -51,14 +51,14 @@ app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
-//* say hi to postgres *// --comment out or remove before production build--
-// const client = new Client({
-//   host: 'localhost',
-//   port: 5432,
-//   user: 'con',
-//   password: 'secretpass',
-// })
-// client
-//   .connect()
-//   .then(() => console.log('postgres database connected....'))
-//   .catch(err => console.error('connection error', err.stack))
+* say hi to postgres *// --comment out or remove before production build--
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  user: 'con',
+  password: 'secretpass',
+})
+client
+  .connect()
+  .then(() => console.log('postgres database connected....'))
+  .catch(err => console.error('connection error', err.stack))
