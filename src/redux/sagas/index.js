@@ -8,6 +8,7 @@ import calendarSaga from './calendarSaga';
 import bandVenueSaga from './bandVenueSaga';
 import profileEditSaga from './profileEditSaga';
 import genreSaga from './genreSaga';
+import adminSaga from './adminSaga';
 
 
 // rootSaga is the primary saga.
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     calendarSaga(),
     bandVenueSaga(),
     profileEditSaga(),
-    genreSaga()
+    genreSaga(),
+    adminSaga()
   ]);
 }
