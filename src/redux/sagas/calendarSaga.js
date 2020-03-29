@@ -15,14 +15,15 @@ function* calendarSaga() {
 function* getEventList(){
     // console.log("We are here in calendar event GET");
     const eventList = yield axios.get('/api/calendar');
-    console.log('in saga - calendar event GET back with:', eventList.data);
+    // console.log('in saga - calendar event GET back with:', eventList.data);
     yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
 }
 
+//get filtered list of calendar event
 function* getNewList(list){
-    console.log("We are here in NEW calendar event GET", list.payload);
+    // console.log("We are here in NEW calendar event GET", list.payload);
     const eventList = yield axios.get(`/api/calendar/new/${list.payload.type}/${list.payload.query}`);
-    console.log('in saga - NEW calendar event GET back with:', eventList.data);
+    // console.log('in saga - NEW calendar event GET back with:', eventList.data);
     yield put({type: 'SET_EVENT_LIST', payload: eventList.data})
 }
 
@@ -30,7 +31,7 @@ function* getNewList(list){
 function* getMyCalendar(user){
     // console.log("here in personal calendar event GET", user.payload.id, user.payload.who);
     const eventList = yield axios.get(`/api/calendar/personal/${user.payload.who}/${user.payload.id}`);
-    console.log('in saga - personal calendar GET back with:', eventList.data);
+    // console.log('in saga - personal calendar GET back with:', eventList.data);
     yield put({type: 'SET_MY_CALENDAR', payload: eventList.data})
 }
 

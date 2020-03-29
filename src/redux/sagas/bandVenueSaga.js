@@ -17,7 +17,7 @@ function* bandVenueSaga() {
 function* getTheBand(band){
     // console.log("We are here in band GET", band.payload);
     const theBand = yield axios.get(`/api/event/band/${band.payload}`);
-    console.log('in saga - band GET back with:', theBand.data);
+    // console.log('in saga - band GET back with:', theBand.data);
     yield put({type: 'SET_THE_BAND', payload: theBand.data[0]})
 }
 
@@ -25,7 +25,7 @@ function* getTheBand(band){
 function* getTheVenue(venue){
     // console.log("We are here in venue GET", venue.payload);
     const theVenue = yield axios.get(`/api/event/venue/${venue.payload}`);
-    console.log('in saga - venue GET back with:', theVenue.data);
+    // console.log('in saga - venue GET back with:', theVenue.data);
     yield put({type: 'SET_THE_VENUE', payload: theVenue.data[0]})
 }
 
@@ -33,7 +33,7 @@ function* getTheVenue(venue){
 function* getAllBands(){
     // console.log("We are here in all bands GET");
     const allBands = yield axios.get(`/api/event/all/bands`);
-    console.log('in saga - all bands GET back with:', allBands.data);
+    // console.log('in saga - all bands GET back with:', allBands.data);
     yield put({type: 'SET_ALL_BANDS', payload: allBands.data})
 }
 
@@ -41,13 +41,13 @@ function* getAllBands(){
 function* getAllVenues(){
     // console.log("We are here in venue GET");
     const allVenues = yield axios.get(`/api/event/all/venues`);
-    console.log('in saga - venue GET back with:', allVenues.data);
+    // console.log('in saga - venue GET back with:', allVenues.data);
     yield put({type: 'SET_ALL_VENUES', payload: allVenues.data})
 }
 
 //unlocks band account for user
 function* newBand(band){
-    console.log("We are here in new band POST saga", band.payload);
+    // console.log("We are here in new band POST saga", band.payload);
     try {
         const newBand = yield axios.post(`/api/profile/new/band/${band.payload}`);
         console.log('returning from new band with', newBand);
@@ -59,7 +59,7 @@ function* newBand(band){
 
 //unlocks venue account for user
 function* newVenue(venue){
-    console.log("We are here in new venue POST saga", venue.payload);
+    // console.log("We are here in new venue POST saga", venue.payload);
     try {
         const newVenue = yield axios.post(`/api/profile/new/venue/${venue.payload}`);
         console.log('returning from new venue with', newVenue);

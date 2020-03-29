@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 //get filtered event list
 router.get('/new/:type/:query', (req, res) => {
-    console.log('in NEW calendar GET', req.params.type, req.params.query);
+    // console.log('in NEW calendar GET', req.params.type, req.params.query);
     let query = req.params.query;
     let column = req.params.type;
     const queryText = `SELECT "calendar"."id", "calendar"."bands_id", "venues_id", "cost",

@@ -11,7 +11,7 @@ function* lebowskiSaga() {
 function* nobdyFucksWithTheJesus(){
     // console.log(	"Come on, Walter, we're ending this thing cheap.");
     const quoteList = yield axios.get('http://lebowski.me/api/quotes/random');
-    console.log('in saga - get leboswki with:', quoteList.data.quote.lines);
+    // console.log('in saga - get leboswki with:', quoteList.data.quote.lines);
     yield put({type: 'I_AM_THE_WALRUS', payload: quoteList.data})
 }
 

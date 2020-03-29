@@ -12,25 +12,25 @@ function* genreSaga() {
 
 //gets all genres from DB
 function* getAllGenres(){
-    console.log("We are here in saga GET all genres");
+    // console.log("We are here in saga GET all genres");
     const allGenres = yield axios.get(`/api/genre`);
-    console.log('in saga - all genres GET back with:', allGenres.data);
+    // console.log('in saga - all genres GET back with:', allGenres.data);
     yield put({type: 'SET_ALL_GENRES', payload: allGenres.data})
 }
 
 //gets this genre from DB
 function* getThisGenre(band){
-    console.log("We are here in saga GET this genre");
+    // console.log("We are here in saga GET this genre");
     const thisGenre = yield axios.get(`/api/genre/${band.payload}`);
-    console.log('in saga - this genre GET back with:', thisGenre.data);
+    // console.log('in saga - this genre GET back with:', thisGenre.data);
     yield put({type: 'SET_THIS_GENRE', payload: thisGenre.data})
 }
 
 //gets bands genre for edit from DB
 function* getEditGenre(band){
-    console.log("We are here in saga GET this band's genre for edit");
+    // console.log("We are here in saga GET this band's genre for edit");
     const thisGenre = yield axios.get(`/api/genre/edit/${band.payload}`);
-    console.log('in saga - this bands edit genre GET back with:', thisGenre.data);
+    // console.log('in saga - this bands edit genre GET back with:', thisGenre.data);
     yield put({type: 'SET_EDIT_GENRE', payload: thisGenre.data})
 }
 

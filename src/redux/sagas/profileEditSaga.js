@@ -13,7 +13,7 @@ function* profileEditSaga() {
 function* getThisBand(band){
     // console.log("We are here in band profile GET", band.payload);
     const theBand = yield axios.get(`/api/profile/band/${band.payload}`);
-    console.log('in saga - band profile GET back with:', theBand.data);
+    // console.log('in saga - band profile GET back with:', theBand.data);
     yield put({type: 'SET_THIS_BAND', payload: theBand.data[0]})
 }
 
@@ -21,7 +21,7 @@ function* getThisBand(band){
 function* getThisVenue(venue){
     // console.log("We are here in venue profile GET", venue.payload);
     const theVenue = yield axios.get(`/api/profile/venue/${venue.payload}`);
-    console.log('in saga - venue profile GET back with:', theVenue.data);
+    // console.log('in saga - venue profile GET back with:', theVenue.data);
     yield put({type: 'SET_THIS_VENUE', payload: theVenue.data[0]})
 }
 

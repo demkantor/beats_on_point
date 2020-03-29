@@ -4,7 +4,7 @@ import '../App/App.css';
 
 
 
-
+// component for admin tasks - currently only displays lists of all bands/venues/users/genres
 class Admin extends Component {
 
   

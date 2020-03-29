@@ -52,7 +52,7 @@ router.put('/details/:id', (req, res) => {
 
 //turn new user into a band
 router.post('/new/band/:id', (req, res) => {
-    console.log('in new band POST with', req.params);
+    // console.log('in new band POST with', req.params);
     const queryText = `INSERT INTO "bands" ("user_name_id") VALUES ($1);`;
     pool.query(queryText, [Number(req.params.id)])
     .then(() => { console.log('user id posted to bands table')

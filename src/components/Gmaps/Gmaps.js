@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 
 
 
-
+// as of this moment only displays map, need to add geo
 export class Gmaps extends Component {
 
   

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../App/App.css';
 
 
-//currently unused component, leftover from orginal draft
+//this component allows user to filter calendar
 class Shows extends Component {
 
     state={

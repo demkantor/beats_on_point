@@ -26,7 +26,7 @@ state={
           <form className="zipForm" onSubmit={this.zippy}>
             <input className="zip" placeholder="Enter Zip" type="text" pattern="[0-9]*" 
             onChange={(event) => this.handleChange('value', event)}/>
-            <input type="submit" value="Submit" />
+            <input className="log-in" type="submit" value="Submit" />
           </form>
         </div>        
       </>
