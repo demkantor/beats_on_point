@@ -22,9 +22,13 @@ class Shows extends Component {
       })
     }
 
+    refresh=()=>{
+      this.props.dispatch({type: 'GET_EVENT_LIST'});
+      this.setState({show: false})
+    }
+
     submit=(event)=>{
       event.preventDefault();
-      console.log(this.state);
       this.props.dispatch({type: 'GET_NEW_LIST', payload: this.state})
     }
 
@@ -61,6 +65,7 @@ class Shows extends Component {
               />
               <p>{this.state.query}</p>
               <input type='submit' className='log-in reverse'/>
+              <button className="log-in reverse" onClick={this.refresh}>refresh</button>
             </form>
           </div>
         </>
