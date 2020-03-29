@@ -12,14 +12,33 @@ class Shows extends Component {
       type: "genre"
     }
 
+    componentDidMount=()=>{
+      this.props.dispatch({type: 'GET_ALL_GENRES'})
+    }
+
     filter=(event)=>{
         this.setState({type: event.target.value});
     }
 
     handleInputChange = () => {
-      this.setState({
-        query: this.search.value
-      })
+      const value = this.search.value
+      this.setState({query: value})
+      const predictions = this.getPredictions(value);
+          this.setState({
+            predictions
+          });
+    }
+
+    getPredictions=(value)=>{
+      if(this.state.type === 'genre'){
+        const list = this.props.reduxState.genreReducer.allGenres.map(genre=>{
+          return genre.genre
+        })
+        if (value.length > 0) {
+        let filteredList = list.filter(genre => genre.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+          this.setState({query: filteredList})
+        }
+      }
     }
 
     refresh=()=>{
@@ -41,6 +60,7 @@ class Shows extends Component {
     }
 
   render() {
+
     return (
       <>
       {this.state.show === false &&
