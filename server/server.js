@@ -51,12 +51,12 @@ app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
-* say hi to postgres *// --comment out or remove before production build--
+// * say hi to postgres *// --comment out or remove before production build--
 const client = new Client({
   host: 'localhost',
   port: 5432,
-  user: 'con',
-  password: 'secretpass',
+  // user: 'con',
+  // password: 'secretpass',
 })
 client
   .connect()
